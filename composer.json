@@ -1,0 +1,38 @@
+{
+    "name": "konekt/client",
+    "description": "Client is a Concord box that handles clients",
+    "type": "library",
+    "minimum-stability": "dev",
+    "keywords": ["laravel", "concord", "concord-box"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "homepage": "https://github.com/fulopattila122"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/artkonekt/client"
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "konekt/concord": "dev-master",
+        "konekt/user": "dev-master",
+        "konekt/address": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.4.2",
+        "phpunit/phpunit" : "^6.0"
+    },
+    "autoload": {
+        "psr-4": { "Konekt\\Client\\": "src"}
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Konekt\\Client\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
