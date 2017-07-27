@@ -68,4 +68,22 @@ class ClientTest extends TestCase
         $this->assertEquals($this->testData->acmeInc->tax_nr, $acme->organization->tax_nr);
     }
 
+    public function testNameMethodResolvesProperly()
+    {
+        $john = ClientProxy::create([
+            'type'      => ClientType::INDIVIDUAL,
+            'person_id' => $this->testData->johnDoe->id
+        ]);
+
+        $this->assertEquals($this->testData->johnDoe->name(), $john->name());
+
+        $acme = ClientProxy::create([
+            'type' => ClientType::ORGANIZATION,
+            'organization_id' => $this->testData->acmeInc->id
+        ]);
+
+        $this->assertEquals($this->testData->acmeInc->name, $acme->name());
+
+    }
+
 }
