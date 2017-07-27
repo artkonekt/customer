@@ -35,4 +35,15 @@ class Client extends Model implements ClientContract
         return $this->hasOne(OrganizationProxy::modelClass(), 'id', 'organization_id');
     }
 
+    public function name()
+    {
+        if ($this->organization) {
+            return $this->organization->name;
+        } elseif ($this->person) {
+            return $this->person->name();
+        }
+
+        return __('Empty');
+    }
+
 }
