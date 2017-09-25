@@ -18,12 +18,19 @@ use Konekt\Enum\Enum;
 class ClientType extends Enum implements ClientTypeContract
 {
     const __default    = self::ORGANIZATION;
+
     const ORGANIZATION = 'organization';
     const INDIVIDUAL   = 'individual';
 
-    protected static $displayTexts = [
-        self::ORGANIZATION => 'Organization',
-        self::INDIVIDUAL   => 'Individual'
-    ];
+
+    protected static $labels = [];
+
+    protected static function boot()
+    {
+        static::$labels = [
+            self::ORGANIZATION => __('Organization'),
+            self::INDIVIDUAL   => __('Individual')
+        ];
+    }
 
 }

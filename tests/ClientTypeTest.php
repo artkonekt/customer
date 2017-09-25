@@ -18,11 +18,14 @@ use Konekt\Client\Models\ClientTypeProxy;
 
 class ClientTypeTest extends TestCase
 {
-    public function testCanBeInstantiated()
+    /**
+     * @test
+     */
+    public function can_be_instantiated()
     {
         $type = new ClientType();
         $this->assertNotNull($type);
-        $this->assertEquals(ClientType::__default, $type->getValue());
+        $this->assertEquals(ClientType::__default, $type->value());
 
         $org = ClientType::ORGANIZATION();
         $this->assertTrue($org->equals(ClientTypeProxy::ORGANIZATION()));

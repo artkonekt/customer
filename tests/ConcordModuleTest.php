@@ -15,9 +15,12 @@ namespace Konekt\Client\Tests;
 
 use Konekt\Concord\Module\Kind;
 
-class ModuleTest extends TestCase
+class ConcordModuleTest extends TestCase
 {
-    public function testModulesArePresent()
+    /**
+     * @test
+     */
+    public function dependent_concord_modules_are_present()
     {
         $modules = $this->concord
             ->getModules()

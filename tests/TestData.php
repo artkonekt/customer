@@ -32,7 +32,7 @@ class TestData
         $this->johnDoe = PersonProxy::create([
             'firstname' => 'John',
             'lastname'  => 'Doe',
-            'gender'    => Gender::MALE()
+            'gender'    => Gender::MALE
         ])->fresh();
 
         $this->acmeInc = OrganizationProxy::create([
