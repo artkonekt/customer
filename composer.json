@@ -3,6 +3,7 @@
     "description": "Client is a Concord box that handles clients",
     "type": "library",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "keywords": ["laravel", "concord", "concord-box"],
     "license": "MIT",
     "authors": [

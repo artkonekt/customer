@@ -12,6 +12,7 @@
 namespace Konekt\Client\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\Organization;
 use Konekt\Address\Models\OrganizationProxy;
 use Konekt\Address\Models\Person;
@@ -55,6 +56,16 @@ class Client extends Model implements ClientContract
     public function organization()
     {
         return $this->hasOne(OrganizationProxy::modelClass(), 'id', 'organization_id');
+    }
+
+    /**
+     * Relation for client addresses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function addresses()
+    {
+        return $this->belongsToMany(AddressProxy::modelClass(), 'client_addresses');
     }
 
     /**

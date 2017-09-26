@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Konekt\Client\Models\ClientType;
+use Konekt\Client\Models\ClientTypeProxy;
 
-class CreateClientTables extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateClientTables extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type', 24)->default(ClientType::__default);
+            $table->string('type', 24)->default(ClientTypeProxy::defaultValue());
             $table->integer('organization_id')->unsigned()->nullable();
             $table->integer('person_id')->unsigned()->nullable();
             $table->boolean('is_active')->default(true);
