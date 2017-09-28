@@ -119,7 +119,12 @@ class ClientTest extends TestCase
         $this->assertEquals($this->testData->johnDoe->firstname, $john->person->firstname);
         $this->assertEquals($this->testData->johnDoe->lastname, $john->person->lastname);
 
-        $john = $john->fresh();
+        $john = $john->fresh(); // still there?
+
+        $this->assertEquals($this->testData->johnDoe->firstname, $john->person->firstname);
+        $this->assertEquals($this->testData->johnDoe->lastname, $john->person->lastname);
+
+        $john = ClientProxy::find($john->id); // I'm bastard to see if it's still there
 
         $this->assertEquals($this->testData->johnDoe->firstname, $john->person->firstname);
         $this->assertEquals($this->testData->johnDoe->lastname, $john->person->lastname);

@@ -41,21 +41,21 @@ class Client extends Model implements ClientContract
     /**
      * Relation for person
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function person()
     {
-        return $this->hasOne(PersonProxy::modelClass(), 'id', 'person_id');
+        return $this->belongsTo(PersonProxy::modelClass());
     }
 
     /**
      * Relation for organization
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function organization()
     {
-        return $this->hasOne(OrganizationProxy::modelClass(), 'id', 'organization_id');
+        return $this->belongsTo(OrganizationProxy::modelClass());
     }
 
     /**
@@ -99,5 +99,54 @@ class Client extends Model implements ClientContract
     {
         $this->attributes['type'] = $value instanceof ClientTypeContract ? $value->value() : $value;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public static function createIndividualClient(array $attributes)
+    {
+        $client = static::create([
+            'type' => ClientType::INDIVIDUAL,
+            'is_active' => array_get($attributes, 'is_active', true)
+        ]);
+
+        $client->person()->associate(
+            PersonProxy::create(array_except($attributes, 'is_active'))
+        );
+
+        $client->save();
+
+        return $client;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function createOrganizationClient(array $attributes)
+    {
+        $client = static::create([
+            'type' => ClientType::ORGANIZATION,
+            'is_active' => array_get($attributes, 'is_active', true)
+        ]);
+
+        $client->organization()->associate(
+            OrganizationProxy::create(array_except($attributes, 'is_active'))
+        );
+
+        $client->save();
+
+        return $client;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function createClient(ClientTypeContract $type, array $attributes)
+    {
+        $methodName = sprintf('create%sClient', camel_case($type->value()));
+
+        return call_user_func(static::class . '::' . $methodName, $attributes);
+    }
+
 
 }
