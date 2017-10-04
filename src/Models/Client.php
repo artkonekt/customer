@@ -12,6 +12,7 @@
 namespace Konekt\Client\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\Organization;
 use Konekt\Address\Models\OrganizationProxy;
@@ -20,6 +21,7 @@ use Konekt\Address\Models\PersonProxy;
 use Konekt\Client\Contracts\Client as ClientContract;
 use Konekt\Client\Contracts\ClientType as ClientTypeContract;
 use Konekt\Client\Events\ClientTypeWasChanged;
+use Konekt\Client\Events\ClientWasCreated;
 use Konekt\Client\Events\ClientWasUpdated;
 
 
@@ -38,6 +40,10 @@ class Client extends Model implements ClientContract
 
     protected $casts = [
         'is_active' => 'boolean'
+    ];
+
+    protected $events = [
+        'created' => ClientWasCreated::class
     ];
 
     /**
@@ -111,6 +117,8 @@ class Client extends Model implements ClientContract
         $type = isset($attributes['type']) ? ClientTypeProxy::create($attributes['type']) : null;
         $typeChange = [];
 
+        DB::beginTransaction();
+
         if (!is_null($type) && !$this->type->equals($type)) {
             $oldAttr = $this->relatedPropertyByType($this->type);
             $typeChange = ['from' => $this->type, 'oldAttributes' => $this->{$oldAttr}->attributesToArray()];
@@ -125,6 +133,8 @@ class Client extends Model implements ClientContract
         }
 
         $this->save();
+
+        DB::commit();
 
         event(new ClientWasUpdated($this));
 
@@ -212,7 +222,9 @@ class Client extends Model implements ClientContract
     protected function convertClient($type, array $attributes)
     {
         $oldRelation = $this->relatedPropertyByType($this->type);
+        $oldModel = $this->{$oldRelation};
         $this->{$oldRelation}()->dissociate();
+        $oldModel->delete();
 
         $newRelation = $this->relatedPropertyByType($type);
         $proxyClass  = sprintf('\\Konekt\\Address\\Models\\%sProxy', studly_case($newRelation));

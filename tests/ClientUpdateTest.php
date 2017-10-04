@@ -14,11 +14,14 @@ namespace Konekt\Client\Tests;
 
 
 use Illuminate\Support\Facades\Event;
+use Konekt\Address\Contracts\Organization;
+use Konekt\Address\Contracts\Person;
+use Konekt\Address\Models\OrganizationProxy;
+use Konekt\Address\Models\PersonProxy;
 use Konekt\Client\Events\ClientTypeWasChanged;
 use Konekt\Client\Events\ClientWasUpdated;
 use Konekt\Client\Models\Client;
 use Konekt\Client\Models\ClientType;
-use Mockery;
 
 class ClientUpdateTest extends TestCase
 {
@@ -178,7 +181,7 @@ class ClientUpdateTest extends TestCase
         $company = $this->johnDoe->fresh();
 
 
-            Event::assertDispatched(ClientTypeWasChanged::class, function ($event) use ($oldAttrs, $company) {
+        Event::assertDispatched(ClientTypeWasChanged::class, function ($event) use ($oldAttrs, $company) {
             return $event->getClient()->id   == $company->id
                 && $event->getClient()->name() == 'Company Ltd.'
                 && ClientType::INDIVIDUAL()->equals($event->fromType)
@@ -186,6 +189,43 @@ class ClientUpdateTest extends TestCase
                 && $event->oldAttributes['lastname'] == $oldAttrs['lastname']
                 && $event->oldAttributes['gender']->equals($oldAttrs['gender']);
         });
+    }
+
+    /**
+     * @test
+     */
+    public function person_entity_gets_removed_when_client_gets_converted_to_organization()
+    {
+        $personId = $this->johnDoe->person->id;
+        $this->johnDoe->updateClient([
+            'name' => 'Brownies Ltd.',
+            'type' => ClientType::ORGANIZATION
+        ]);
+
+        $brownies = $this->johnDoe->fresh();
+
+        $this->assertNull($brownies->person);
+        $this->assertInstanceOf(Organization::class, $brownies->organization);
+        $this->assertNull(PersonProxy::find($personId));
+    }
+
+    /**
+     * @test
+     */
+    public function organization_entity_gets_removed_when_client_gets_converted_to_individual()
+    {
+        $orgId = $this->acme->organization->id;
+        $this->acme->updateClient([
+            'firstname' => 'Jack',
+            'lastname'  => 'Sparrow',
+            'type'      => ClientType::INDIVIDUAL
+        ]);
+
+        $sparrow = $this->acme->fresh();
+
+        $this->assertNull($sparrow->organization);
+        $this->assertInstanceOf(Person::class, $sparrow->person);
+        $this->assertNull(OrganizationProxy::find($orgId));
     }
 
 }

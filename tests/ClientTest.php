@@ -13,8 +13,10 @@
 namespace Konekt\Client\Tests;
 
 
+use Illuminate\Support\Facades\Event;
 use Konekt\Client\Contracts\Client as ClientContract;
 use Konekt\Client\Contracts\ClientType as ClientTypeContract;
+use Konekt\Client\Events\ClientWasCreated;
 use Konekt\Client\Models\Client;
 use Konekt\Client\Models\ClientProxy;
 use Konekt\Client\Models\ClientType;
@@ -162,6 +164,38 @@ class ClientTest extends TestCase
         ]);
 
         $this->assertEquals($this->testData->acmeInc->name, $acme->name());
+    }
+
+    /**
+     * The event gets fired but expectsEvents doesn't detect it for some reason - disabled
+     * @ test
+     */
+    public function client_was_created_event_is_fired_on_create()
+    {
+        $this->expectsEvents(ClientWasCreated::class);
+
+        ClientProxy::create([
+            'type' => ClientType::ORGANIZATION,
+            'organization_id' => $this->testData->acmeInc->id
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function client_was_created_event_contains_the_client()
+    {
+        Event::fake();
+
+        $acme = ClientProxy::create([
+            'type' => ClientType::ORGANIZATION,
+            'organization_id' => $this->testData->acmeInc->id
+        ]);
+
+        Event::assertDispatched(ClientWasCreated::class, function ($event) use ($acme) {
+            return $event->getClient()->id   == $acme->id
+                && $event->getClient()->name() == $acme->name();
+        });
     }
 
 }
