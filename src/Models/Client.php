@@ -11,6 +11,7 @@
 
 namespace Konekt\Client\Models;
 
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\Organization;
@@ -30,6 +31,8 @@ use Konekt\Client\Contracts\ClientType as ClientTypeContract;
  */
 class Client extends Model implements ClientContract
 {
+    use FormAccessible;
+
     protected $table = 'clients';
 
     protected $fillable = ['type', 'person_id', 'organization_id', 'is_active'];
@@ -101,6 +104,17 @@ class Client extends Model implements ClientContract
     }
 
     /**
+     * Form accessor for the type field
+     *
+     * @return string
+     */
+    public function formTypeAttribute()
+    {
+        return $this->type->value();
+    }
+
+
+    /**
      * @inheritdoc
      */
     public static function createIndividualClient(array $attributes)
@@ -146,6 +160,21 @@ class Client extends Model implements ClientContract
         $methodName = sprintf('create%sClient', camel_case($type->value()));
 
         return call_user_func(static::class . '::' . $methodName, $attributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateClient(array $attributes, ClientTypeContract $type = null)
+    {
+        if (!is_null($type) && !$this->type->equals($type)) {
+            // Remove old related type
+            // Create new related type
+            // Emit type was changed event
+        } else {
+            // just update related model data
+        }
+
     }
 
 
