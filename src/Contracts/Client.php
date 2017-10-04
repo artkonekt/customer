@@ -16,6 +16,13 @@ namespace Konekt\Client\Contracts;
 interface Client
 {
     /**
+     * Update a client (also handles type conversion)
+     *
+     * @param array $attributes
+     */
+    public function updateClient(array $attributes);
+
+    /**
      * Creates an individual client (along with underlying person object)
      * If is_active flag is unset, it defaults to true
      *

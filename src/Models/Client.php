@@ -11,7 +11,6 @@
 
 namespace Konekt\Client\Models;
 
-use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\Organization;
@@ -20,6 +19,8 @@ use Konekt\Address\Models\Person;
 use Konekt\Address\Models\PersonProxy;
 use Konekt\Client\Contracts\Client as ClientContract;
 use Konekt\Client\Contracts\ClientType as ClientTypeContract;
+use Konekt\Client\Events\ClientTypeWasChanged;
+use Konekt\Client\Events\ClientWasUpdated;
 
 
 /**
@@ -31,8 +32,6 @@ use Konekt\Client\Contracts\ClientType as ClientTypeContract;
  */
 class Client extends Model implements ClientContract
 {
-    use FormAccessible;
-
     protected $table = 'clients';
 
     protected $fillable = ['type', 'person_id', 'organization_id', 'is_active'];
@@ -104,15 +103,35 @@ class Client extends Model implements ClientContract
     }
 
     /**
-     * Form accessor for the type field
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function formTypeAttribute()
+    public function updateClient(array $attributes)
     {
-        return $this->type->value();
-    }
+        $relAttrs = array_except($attributes, ['is_active', 'type']);
+        $type = isset($attributes['type']) ? ClientTypeProxy::create($attributes['type']) : null;
+        $typeChange = [];
 
+        if (!is_null($type) && !$this->type->equals($type)) {
+            $oldAttr = $this->relatedPropertyByType($this->type);
+            $typeChange = ['from' => $this->type, 'oldAttributes' => $this->{$oldAttr}->attributesToArray()];
+            $this->convertClient($type, $relAttrs);
+        } else {
+            $attr = $this->relatedPropertyByType($this->type);
+            $this->{$attr}->update($relAttrs);
+        }
+
+        if (array_key_exists('is_active', $attributes)) {
+            $this->is_active = $attributes['is_active'];
+        }
+
+        $this->save();
+
+        event(new ClientWasUpdated($this));
+
+        if (!empty($typeChange)) {
+            event(new ClientTypeWasChanged($this, $typeChange['from'], $typeChange['oldAttributes'] ));
+        }
+    }
 
     /**
      * @inheritdoc
@@ -157,25 +176,51 @@ class Client extends Model implements ClientContract
      */
     public static function createClient(ClientTypeContract $type, array $attributes)
     {
-        $methodName = sprintf('create%sClient', camel_case($type->value()));
+        $methodName = sprintf('create%sClient', studly_case($type->value()));
 
         return call_user_func(static::class . '::' . $methodName, $attributes);
     }
 
     /**
-     * @inheritdoc
+     * Returns the related property (model) name based on client type
+     *
+     * @param ClientTypeContract $type
+     *
+     * @return string
+     * @throws \Exception
      */
-    public function updateClient(array $attributes, ClientTypeContract $type = null)
+    protected function relatedPropertyByType(ClientTypeContract $type)
     {
-        if (!is_null($type) && !$this->type->equals($type)) {
-            // Remove old related type
-            // Create new related type
-            // Emit type was changed event
-        } else {
-            // just update related model data
+        switch ($type->value()) {
+            case ClientType::ORGANIZATION:
+                return 'organization';
+                break;
+            case ClientType::INDIVIDUAL:
+                return 'person';
+                break;
+            default:
+                throw new \Exception(__('Unknown client type :type', ['type' => $type->value()]));
         }
-
     }
 
+    /**
+     * Changes the client type, removes the related model, associates new empty related model
+     *
+     * @param ClientTypeContract $type
+     * @param array              $attributes
+     */
+    protected function convertClient($type, array $attributes)
+    {
+        $oldRelation = $this->relatedPropertyByType($this->type);
+        $this->{$oldRelation}()->dissociate();
+
+        $newRelation = $this->relatedPropertyByType($type);
+        $proxyClass  = sprintf('\\Konekt\\Address\\Models\\%sProxy', studly_case($newRelation));
+        $model       = $proxyClass::create($attributes);
+
+        $this->{$newRelation}()->associate($model);
+
+        $this->type = $type;
+    }
 
 }
