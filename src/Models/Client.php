@@ -199,7 +199,7 @@ class Client extends Model implements ClientContract
      * @return string
      * @throws \Exception
      */
-    protected function relatedPropertyByType(ClientTypeContract $type)
+    public function relatedPropertyByType(ClientTypeContract $type)
     {
         switch ($type->value()) {
             case ClientType::ORGANIZATION:
