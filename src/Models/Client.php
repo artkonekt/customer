@@ -23,6 +23,7 @@ use Konekt\Client\Contracts\ClientType as ClientTypeContract;
 use Konekt\Client\Events\ClientTypeWasChanged;
 use Konekt\Client\Events\ClientWasCreated;
 use Konekt\Client\Events\ClientWasUpdated;
+use Konekt\Enum\Eloquent\CastsEnums;
 
 
 /**
@@ -34,12 +35,18 @@ use Konekt\Client\Events\ClientWasUpdated;
  */
 class Client extends Model implements ClientContract
 {
+    use CastsEnums;
+
     protected $table = 'clients';
 
     protected $fillable = ['type', 'person_id', 'organization_id', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean'
+    ];
+
+    protected $enums = [
+        'type' => ClientType::class
     ];
 
     protected $events = [
@@ -90,22 +97,6 @@ class Client extends Model implements ClientContract
         }
 
         return __('Empty');
-    }
-
-    /**
-     * @return ClientType
-     */
-    public function getTypeAttribute()
-    {
-        return ClientTypeProxy::create(array_get($this->attributes, 'type'));
-    }
-
-    /**
-     * @param ClientType|string $value
-     */
-    public function setTypeAttribute($value)
-    {
-        $this->attributes['type'] = $value instanceof ClientTypeContract ? $value->value() : $value;
     }
 
     /**

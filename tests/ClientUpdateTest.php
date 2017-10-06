@@ -187,7 +187,7 @@ class ClientUpdateTest extends TestCase
                 && ClientType::INDIVIDUAL()->equals($event->fromType)
                 && $event->oldAttributes['firstname'] == $oldAttrs['firstname']
                 && $event->oldAttributes['lastname'] == $oldAttrs['lastname']
-                && $event->oldAttributes['gender']->equals($oldAttrs['gender']);
+                && $event->oldAttributes['gender'] == $oldAttrs['gender'];
         });
     }
 
