@@ -1,5 +1,6 @@
 # Konekt Client Library (Laravel)
 
+[![Build Status](https://travis-ci.org/artkonekt/client.svg?branch=master)](https://travis-ci.org/artkonekt/client)
 [![Latest Stable Version](https://poser.pugx.org/konekt/client/version.svg)](https://packagist.org/packages/konekt/client)
 [![Total Downloads](https://poser.pugx.org/konekt/client/downloads.svg)](https://packagist.org/packages/konekt/client)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
