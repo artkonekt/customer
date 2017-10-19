@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ModuleTest class.
+ * Contains the ConcordModuleTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -13,7 +13,6 @@
 namespace Konekt\Client\Tests;
 
 
-use Konekt\Concord\Module\Kind;
 
 class ConcordModuleTest extends TestCase
 {
@@ -36,8 +35,8 @@ class ConcordModuleTest extends TestCase
             $modules->get('konekt.client')
                     ->getManifest()
                     ->getKind()
-                    ->equals(Kind::BOX()),
-            'Concord Module Type Should be a box'
+                    ->isModule(),
+            'Concord Module Type Should be a module'
         );
     }
 
