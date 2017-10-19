@@ -15,10 +15,10 @@ namespace Konekt\Client\Providers;
 
 use Konekt\Client\Models\Client;
 use Konekt\Client\Models\ClientType;
-use Konekt\Concord\BaseBoxServiceProvider;
+use Konekt\Concord\BaseModuleServiceProvider;
 
 
-class ModuleServiceProvider extends BaseBoxServiceProvider
+class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
         Client::class
