@@ -35,7 +35,7 @@ class ClientFactoryMethodsTest extends TestCase
         $this->assertTrue($individual->is_active);
         $this->assertInstanceOf(Person::class, $individual->person);
         $this->assertNull($individual->organization);
-        $this->assertEquals('Giovanni Gatto', $individual->person->name());
+        $this->assertEquals('Giovanni Gatto', $individual->person->getFullName());
 
         // I'm evil, will check the same after a complete refetch:
         $individual = Client::find($individual->id);
@@ -99,7 +99,7 @@ class ClientFactoryMethodsTest extends TestCase
         $this->assertTrue($individual->is_active);
         $this->assertInstanceOf(Person::class, $individual->person);
         $this->assertNull($individual->organization);
-        $this->assertEquals('Giovanni Gatto', $individual->person->name());
+        $this->assertEquals('Giovanni Gatto', $individual->person->getFullName());
     }
 
     /**

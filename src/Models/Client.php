@@ -93,7 +93,7 @@ class Client extends Model implements ClientContract
         if ($this->organization) {
             return $this->organization->name;
         } elseif ($this->person) {
-            return $this->person->name();
+            return $this->person->getFullName();
         }
 
         return __('Empty');

@@ -156,7 +156,7 @@ class ClientTest extends TestCase
             'person_id' => $this->testData->johnDoe->id
         ]);
 
-        $this->assertEquals($this->testData->johnDoe->name(), $john->name());
+        $this->assertEquals($this->testData->johnDoe->getFullName(), $john->name());
 
         $acme = ClientProxy::create([
             'type' => ClientType::ORGANIZATION,
