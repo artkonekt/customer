@@ -13,8 +13,11 @@
 namespace Konekt\Client\Tests;
 
 
+use Konekt\Client\Contracts\ClientType as ClientTypeContract;
+use Konekt\Client\Models\ClientProxy;
 use Konekt\Client\Models\ClientType;
 use Konekt\Client\Models\ClientTypeProxy;
+use Konekt\Enum\Enum;
 
 class ClientTypeTest extends TestCase
 {
@@ -33,6 +36,17 @@ class ClientTypeTest extends TestCase
         $individual = ClientType::INDIVIDUAL();
         $this->assertTrue($individual->equals(ClientTypeProxy::INDIVIDUAL()));
 
+    }
+
+    /**
+     * @test
+     */
+    public function client_type_is_an_enum()
+    {
+        $client = ClientProxy::create([])->fresh();
+
+        $this->assertInstanceOf(ClientTypeContract::class, $client->type);
+        $this->assertInstanceOf(Enum::class, $client->type);
     }
 
 }

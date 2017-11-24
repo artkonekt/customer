@@ -14,49 +14,13 @@ namespace Konekt\Client\Tests;
 
 
 use Illuminate\Support\Facades\Event;
-use Konekt\Client\Contracts\Client as ClientContract;
-use Konekt\Client\Contracts\ClientType as ClientTypeContract;
 use Konekt\Client\Events\ClientWasCreated;
 use Konekt\Client\Models\Client;
 use Konekt\Client\Models\ClientProxy;
 use Konekt\Client\Models\ClientType;
-use Konekt\Enum\Enum;
 
-class ClientTest extends TestCase
+class ClientCreateTest extends TestCase
 {
-
-    /**
-     * @test
-     */
-    public function concord_has_model()
-    {
-        $this->assertTrue(
-            $this->concord->getModelBindings()->has(ClientContract::class),
-            'The client model should be present in Concord'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function model_can_be_resolved_from_interface()
-    {
-        $client = $this->app->make(ClientContract::class);
-
-        $this->assertInstanceOf(ClientContract::class, $client);
-
-        // We also expect that it's the default client model from this package
-        $this->assertInstanceOf(Client::class, $client);
-    }
-
-    /**
-     * @test
-     */
-    public function model_proxy_resolves_to_default_model()
-    {
-        $this->assertEquals(Client::class, ClientProxy::modelClass());
-    }
-
     /**
      * @test
      */
@@ -66,17 +30,6 @@ class ClientTest extends TestCase
 
         $this->assertTrue($client->is_active);
         $this->assertEquals(ClientType::__default, $client->type->value());
-    }
-
-    /**
-     * @test
-     */
-    public function client_type_is_an_enum()
-    {
-        $client = ClientProxy::create([])->fresh();
-
-        $this->assertInstanceOf(ClientTypeContract::class, $client->type);
-        $this->assertInstanceOf(Enum::class, $client->type);
     }
 
     /**
@@ -144,26 +97,6 @@ class ClientTest extends TestCase
 
         $this->assertEquals($this->testData->acmeInc->name, $acme->organization->name);
         $this->assertEquals($this->testData->acmeInc->tax_nr, $acme->organization->tax_nr);
-    }
-
-    /**
-     * @test
-     */
-    public function client_name_method_resolves_properly()
-    {
-        $john = ClientProxy::create([
-            'type'      => ClientType::INDIVIDUAL,
-            'person_id' => $this->testData->johnDoe->id
-        ]);
-
-        $this->assertEquals($this->testData->johnDoe->getFullName(), $john->name());
-
-        $acme = ClientProxy::create([
-            'type' => ClientType::ORGANIZATION,
-            'organization_id' => $this->testData->acmeInc->id
-        ]);
-
-        $this->assertEquals($this->testData->acmeInc->name, $acme->name());
     }
 
     /**

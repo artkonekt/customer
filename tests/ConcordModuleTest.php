@@ -12,7 +12,7 @@
 
 namespace Konekt\Client\Tests;
 
-
+use Konekt\Client\Contracts\Client;
 
 class ConcordModuleTest extends TestCase
 {
@@ -37,6 +37,17 @@ class ConcordModuleTest extends TestCase
                     ->getKind()
                     ->isModule(),
             'Concord Module Type Should be a module'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function concord_has_model()
+    {
+        $this->assertTrue(
+            $this->concord->getModelBindings()->has(Client::class),
+            'The client model should be present in Concord'
         );
     }
 
