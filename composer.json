@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "konekt/concord": ">=0.9.6",
+        "konekt/concord": ">=0.9.8",
         "konekt/user": "dev-master",
         "konekt/address": ">=0.9.6"
     },

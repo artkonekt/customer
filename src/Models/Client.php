@@ -18,6 +18,7 @@ use Konekt\Address\Models\Organization;
 use Konekt\Address\Models\OrganizationProxy;
 use Konekt\Address\Models\Person;
 use Konekt\Address\Models\PersonProxy;
+use Konekt\Address\Utils\PersonNameSplitter;
 use Konekt\Client\Contracts\Client as ClientContract;
 use Konekt\Client\Contracts\ClientType as ClientTypeContract;
 use Konekt\Client\Events\ClientTypeWasChanged;
@@ -46,12 +47,30 @@ class Client extends Model implements ClientContract
     ];
 
     protected $enums = [
-        'type' => ClientType::class
+        'type' => 'ClientTypeProxy@enumClass'
     ];
 
     protected $events = [
         'created' => ClientWasCreated::class
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // This is simple and OK. Stop grunting.
+        static::saving(function($client) {
+
+            if ($client->person && $client->person->isDirty()) {
+                $client->person->save();
+            }
+
+            if ($client->organization && $client->organization->isDirty()) {
+                $client->organization->save();
+            }
+        });
+    }
+
 
     /**
      * Relation for person
@@ -96,7 +115,51 @@ class Client extends Model implements ClientContract
             return $this->person->getFullName();
         }
 
-        return __('Empty');
+        return null;
+    }
+
+    public function setNameAttribute($value)
+    {
+        if ($this->organization) {
+            $this->organization->name = $value;
+        } elseif ($this->person) {
+            foreach (PersonNameSplitter::split($value) as $attrName => $attrValue) {
+                $this->person->{$attrName} = $attrValue;
+            }
+        }
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->name();
+    }
+
+    public function getEmailAttribute()
+    {
+        $attr = $this->relatedPropertyByType($this->type);
+
+        return $this->{$attr}->email;
+    }
+
+    public function setEmailAttribute($value)
+    {
+        $attr = $this->relatedPropertyByType($this->type);
+
+        return $this->{$attr}->email = $value;
+    }
+
+    public function getPhoneAttribute()
+    {
+        $attr = $this->relatedPropertyByType($this->type);
+
+        return $this->{$attr}->phone;
+    }
+
+    public function setPhoneAttribute($value)
+    {
+        $attr = $this->relatedPropertyByType($this->type);
+
+        return $this->{$attr}->phone = $value;
     }
 
     /**
@@ -144,8 +207,15 @@ class Client extends Model implements ClientContract
             'is_active' => array_get($attributes, 'is_active', true)
         ]);
 
+        if (array_key_exists('name', $attributes)) {
+            $attributes = array_merge(
+                $attributes,
+                PersonNameSplitter::split($attributes['name'])
+            );
+        }
+
         $client->person()->associate(
-            PersonProxy::create(array_except($attributes, 'is_active'))
+            PersonProxy::create(array_except($attributes, ['is_active', 'name']))
         );
 
         $client->save();
