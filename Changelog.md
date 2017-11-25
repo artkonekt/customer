@@ -3,6 +3,13 @@
 
 ## 0.9
 
+### 0.9.2
+##### 2017-11-25
+
+- Client factory methods have been added for creating client objects
+  without saving them to the db
+
+
 ### 0.9.1
 ##### 2017-11-25
 
