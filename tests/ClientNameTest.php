@@ -15,7 +15,6 @@ namespace Konekt\Client\Tests;
 
 use Konekt\Address\Models\NameOrder;
 use Konekt\Client\Models\Client;
-use Konekt\Client\Models\ClientType;
 
 class ClientNameTest extends TestCase
 {
