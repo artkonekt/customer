@@ -2,5 +2,5 @@
 
 return [
     'name'    => 'Konekt Client Module',
-    'version' => '0.9.0'
+    'version' => '0.9.1'
 ];
