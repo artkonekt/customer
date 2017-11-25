@@ -14,6 +14,7 @@ namespace Konekt\Client\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Konekt\Address\Models\AddressProxy;
+use Konekt\Address\Models\NameOrderProxy;
 use Konekt\Address\Models\Organization;
 use Konekt\Address\Models\OrganizationProxy;
 use Konekt\Address\Models\Person;
@@ -123,7 +124,7 @@ class Client extends Model implements ClientContract
         if ($this->organization) {
             $this->organization->name = $value;
         } elseif ($this->person) {
-            foreach (PersonNameSplitter::split($value) as $attrName => $attrValue) {
+            foreach (PersonNameSplitter::split($value, $this->person->nameorder) as $attrName => $attrValue) {
                 $this->person->{$attrName} = $attrValue;
             }
         }
@@ -210,7 +211,7 @@ class Client extends Model implements ClientContract
         if (array_key_exists('name', $attributes)) {
             $attributes = array_merge(
                 $attributes,
-                PersonNameSplitter::split($attributes['name'])
+                PersonNameSplitter::split($attributes['name'], NameOrderProxy::create(array_get($attributes, 'nameorder')))
             );
         }
 
