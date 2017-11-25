@@ -59,15 +59,23 @@ class Client extends Model implements ClientContract
     {
         parent::boot();
 
-        // This is simple and OK. Stop grunting.
+        // This is simple and OK. Stop moaning.
         static::saving(function($client) {
 
             if ($client->person && $client->person->isDirty()) {
+                $wasNew = !$client->person->exists;
                 $client->person->save();
+                if ($wasNew) { // need to re-associate otherwise it gets forgotten
+                    $client->person()->associate($client->person);
+                }
             }
 
             if ($client->organization && $client->organization->isDirty()) {
+                $wasNew = !$client->organization->exists;
                 $client->organization->save();
+                if ($wasNew) { // need to re-associate otherwise it gets forgotten
+                    $client->organization()->associate($client->organization);
+                }
             }
         });
     }
@@ -201,12 +209,11 @@ class Client extends Model implements ClientContract
     /**
      * @inheritdoc
      */
-    public static function createIndividualClient(array $attributes)
+    public static function newIndividualClient(array $attributes)
     {
-        $client = static::create([
-            'type' => ClientType::INDIVIDUAL,
-            'is_active' => array_get($attributes, 'is_active', true)
-        ]);
+        $client = new static();
+        $client->type = ClientTypeProxy::INDIVIDUAL();
+        $client->is_active = array_get($attributes, 'is_active', true);
 
         if (array_key_exists('name', $attributes)) {
             $attributes = array_merge(
@@ -215,10 +222,46 @@ class Client extends Model implements ClientContract
             );
         }
 
-        $client->person()->associate(
-            PersonProxy::create(array_except($attributes, ['is_active', 'name']))
-        );
+        $personClass = PersonProxy::modelClass();
+        $person = new $personClass(array_except($attributes, ['is_active', 'name']));
+        $client->person()->associate($person);
 
+        return $client;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function newOrganizationClient(array $attributes)
+    {
+        $client = new static();
+        $client->type = ClientTypeProxy::ORGANIZATION();
+        $client->is_active = array_get($attributes, 'is_active', true);
+
+        $organizationClass = OrganizationProxy::modelClass();
+        $organziation = new $organizationClass(array_except($attributes, 'is_active'));
+        $client->organization()->associate($organziation);
+
+        return $client;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function newClient(ClientTypeContract $type, array $attributes)
+    {
+        $methodName = sprintf('new%sClient', studly_case($type->value()));
+
+        return call_user_func(static::class . '::' . $methodName, $attributes);
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public static function createIndividualClient(array $attributes)
+    {
+        $client = static::newIndividualClient($attributes);
         $client->save();
 
         return $client;
@@ -229,15 +272,7 @@ class Client extends Model implements ClientContract
      */
     public static function createOrganizationClient(array $attributes)
     {
-        $client = static::create([
-            'type' => ClientType::ORGANIZATION,
-            'is_active' => array_get($attributes, 'is_active', true)
-        ]);
-
-        $client->organization()->associate(
-            OrganizationProxy::create(array_except($attributes, 'is_active'))
-        );
-
+        $client = static::newOrganizationClient($attributes);
         $client->save();
 
         return $client;

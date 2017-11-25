@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientFactoryMethodsTest class.
+ * Contains the CreateFactoryMethodsTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -19,7 +19,7 @@ use Konekt\Client\Models\Client;
 use Konekt\Client\Models\ClientProxy;
 use Konekt\Client\Models\ClientType;
 
-class ClientFactoryMethodsTest extends TestCase
+class CreateFactoryMethodsTest extends TestCase
 {
     /**
      * @test
@@ -44,6 +44,10 @@ class ClientFactoryMethodsTest extends TestCase
         $this->assertTrue($individual->is_active);
         $this->assertInstanceOf(Person::class, $individual->person);
         $this->assertNull($individual->organization);
+
+        // Check if eloquent reports they exists in db
+        $this->assertTrue($individual->exists);
+        $this->assertTrue($individual->person->exists);
     }
 
 
@@ -68,6 +72,10 @@ class ClientFactoryMethodsTest extends TestCase
         $this->assertTrue($org->is_active);
         $this->assertNull($org->person);
         $this->assertInstanceOf(Organization::class, $org->organization);
+
+        // Check if eloquent reports they exists in db
+        $this->assertTrue($org->exists);
+        $this->assertTrue($org->organization->exists);
     }
 
     /**

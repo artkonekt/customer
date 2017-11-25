@@ -24,6 +24,8 @@ interface Client
 
     /**
      * Creates an individual client (along with underlying person object)
+     * and saves it to the DB.
+     *
      * If is_active flag is unset, it defaults to true
      *
      * @param array $attributes
@@ -33,7 +35,9 @@ interface Client
     public static function createIndividualClient(array $attributes);
 
     /**
-     * Creates an individual client (along with underlying organization object)
+     * Creates an organization client (along with underlying organization object)
+     * and saves it to the DB.
+     *
      * If is_active flag is unset, it defaults to true
      *
      * @param array $attributes
@@ -43,7 +47,7 @@ interface Client
     public static function createOrganizationClient(array $attributes);
 
     /**
-     * Creates a client of the specified type
+     * Creates a client of the specified type and saves it to the DB.
      *
      * @param ClientType        $type
      * @param array             $attributes
@@ -51,5 +55,39 @@ interface Client
      * @return static
      */
     public static function createClient(ClientType $type, array $attributes);
+
+    /**
+     * Creates an individual client object (along with underlying person object)
+     * but DOES NOT SAVE it to the DB.
+     *
+     * If is_active flag is unset, it defaults to true
+     *
+     * @param array $attributes
+     *
+     * @return static
+     */
+    public static function newIndividualClient(array $attributes);
+
+    /**
+     * Creates an organization client object (along with underlying organization object)
+     * but DOES NOT SAVE it to the DB.
+     *
+     * If is_active flag is unset, it defaults to true
+     *
+     * @param array $attributes
+     *
+     * @return static
+     */
+    public static function newOrganizationClient(array $attributes);
+
+    /**
+     * Creates a client of the specified type but DOES NOT SAVE it to the DB.
+     *
+     * @param ClientType        $type
+     * @param array             $attributes
+     *
+     * @return static
+     */
+    public static function newClient(ClientType $type, array $attributes);
 
 }

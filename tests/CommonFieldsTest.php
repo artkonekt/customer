@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientCommonFieldsTest class.
+ * Contains the CommonFieldsTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -15,7 +15,7 @@ namespace Konekt\Client\Tests;
 
 use Konekt\Client\Models\Client;
 
-class ClientCommonFieldsTest extends TestCase
+class CommonFieldsTest extends TestCase
 {
     /**
      * @test
