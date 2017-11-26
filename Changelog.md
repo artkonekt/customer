@@ -3,8 +3,8 @@
 
 ## 0.9
 
-### Unreleased
-##### 2017-11-XX
+### 0.9.3
+##### 2017-11-26
 
 - Client Module has been forked into Customer
 - Everything has been renamed from **_Client_ -> Customer**
