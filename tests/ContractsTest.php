@@ -10,11 +10,11 @@
  */
 
 
-namespace Konekt\Client\Tests;
+namespace Konekt\Customer\Tests;
 
-use Konekt\Client\Contracts\Client as ClientContract;
-use Konekt\Client\Models\Client;
-use Konekt\Client\Models\ClientProxy;
+use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Konekt\Customer\Models\Customer;
+use Konekt\Customer\Models\CustomerProxy;
 
 class ContractsTest extends TestCase
 {
@@ -23,12 +23,12 @@ class ContractsTest extends TestCase
      */
     public function model_can_be_resolved_from_interface()
     {
-        $client = $this->app->make(ClientContract::class);
+        $customer = $this->app->make(CustomerContract::class);
 
-        $this->assertInstanceOf(ClientContract::class, $client);
+        $this->assertInstanceOf(CustomerContract::class, $customer);
 
-        // We also expect that it's the default client model from this package
-        $this->assertInstanceOf(Client::class, $client);
+        // We also expect that it's the default customer model from this package
+        $this->assertInstanceOf(Customer::class, $customer);
     }
 
     /**
@@ -36,7 +36,7 @@ class ContractsTest extends TestCase
      */
     public function model_proxy_resolves_to_default_model()
     {
-        $this->assertEquals(Client::class, ClientProxy::modelClass());
+        $this->assertEquals(Customer::class, CustomerProxy::modelClass());
     }
 
 }

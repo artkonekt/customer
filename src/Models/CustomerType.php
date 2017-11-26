@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientType enum class.
+ * Contains the CustomerType enum class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,12 +10,12 @@
  */
 
 
-namespace Konekt\Client\Models;
+namespace Konekt\Customer\Models;
 
-use Konekt\Client\Contracts\ClientType as ClientTypeContract;
+use Konekt\Customer\Contracts\CustomerType as CustomerTypeContract;
 use Konekt\Enum\Enum;
 
-class ClientType extends Enum implements ClientTypeContract
+class CustomerType extends Enum implements CustomerTypeContract
 {
     const __default    = self::ORGANIZATION;
 

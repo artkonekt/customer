@@ -1,7 +1,21 @@
 # Changelog
-### Konekt Client Module
+### Konekt Customer Module
 
 ## 0.9
+
+### Unreleased
+##### 2017-11-XX
+
+- Client Module has been forked into Customer
+- Everything has been renamed from **_Client_ -> Customer**
+- Customer is no longer a composite object of `Person` and `Organization`
+- Customer is now stored in a single table, and no longer contains the
+  following fields:
+    - birthdate
+    - gender
+    - nin
+    - nameorder
+- Nameorder and gender support has been dropped (so far)
 
 ### 0.9.2
 ##### 2017-11-25

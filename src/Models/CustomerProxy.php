@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientProxy class.
+ * Contains the CustomerProxy class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,12 +10,12 @@
  */
 
 
-namespace Konekt\Client\Models;
+namespace Konekt\Customer\Models;
 
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class ClientProxy extends ModelProxy
+class CustomerProxy extends ModelProxy
 {
 
 }

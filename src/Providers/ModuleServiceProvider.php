@@ -10,22 +10,22 @@
  */
 
 
-namespace Konekt\Client\Providers;
+namespace Konekt\Customer\Providers;
 
 
-use Konekt\Client\Models\Client;
-use Konekt\Client\Models\ClientType;
+use Konekt\Customer\Models\Customer;
+use Konekt\Customer\Models\CustomerType;
 use Konekt\Concord\BaseModuleServiceProvider;
 
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Client::class
+        Customer::class
     ];
 
     protected $enums = [
-        ClientType::class
+        CustomerType::class
     ];
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientWasCreated event class.
+ * Contains the CustomerWasUpdated event class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Client\Events;
+namespace Konekt\Customer\Events;
 
 
-class ClientWasCreated extends BaseClientEvent
+class CustomerWasUpdated extends BaseCustomerEvent
 {
 
 }

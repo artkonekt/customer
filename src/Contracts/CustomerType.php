@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientType interface.
+ * Contains the CustomerType interface.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,10 +10,10 @@
  */
 
 
-namespace Konekt\Client\Contracts;
+namespace Konekt\Customer\Contracts;
 
 
-interface ClientType
+interface CustomerType
 {
 
 }

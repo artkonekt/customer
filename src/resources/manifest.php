@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'name'    => 'Konekt Client Module',
+    'name'    => 'Konekt Customer Module',
     'version' => '0.9.2'
 ];

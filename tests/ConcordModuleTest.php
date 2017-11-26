@@ -10,9 +10,9 @@
  */
 
 
-namespace Konekt\Client\Tests;
+namespace Konekt\Customer\Tests;
 
-use Konekt\Client\Contracts\Client;
+use Konekt\Customer\Contracts\Customer;
 
 class ConcordModuleTest extends TestCase
 {
@@ -27,12 +27,12 @@ class ConcordModuleTest extends TestCase
                 return $module->getId();
             });
 
-        $this->assertTrue($modules->has('konekt.client'), 'Client module should be registered');
+        $this->assertTrue($modules->has('konekt.customer'), 'Customer module should be registered');
         $this->assertTrue($modules->has('konekt.address'), 'Address module should be registered');
         $this->assertTrue($modules->has('konekt.user'), 'User module should be registered');
 
         $this->assertTrue(
-            $modules->get('konekt.client')
+            $modules->get('konekt.customer')
                     ->getManifest()
                     ->getKind()
                     ->isModule(),
@@ -46,8 +46,8 @@ class ConcordModuleTest extends TestCase
     public function concord_has_model()
     {
         $this->assertTrue(
-            $this->concord->getModelBindings()->has(Client::class),
-            'The client model should be present in Concord'
+            $this->concord->getModelBindings()->has(Customer::class),
+            'The customer model should be present in Concord'
         );
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientTypeProxy class.
+ * Contains the CustomerTypeProxy class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,12 +10,12 @@
  */
 
 
-namespace Konekt\Client\Models;
+namespace Konekt\Customer\Models;
 
 
 use Konekt\Concord\Proxies\EnumProxy;
 
-class ClientTypeProxy extends EnumProxy
+class CustomerTypeProxy extends EnumProxy
 {
 
 }

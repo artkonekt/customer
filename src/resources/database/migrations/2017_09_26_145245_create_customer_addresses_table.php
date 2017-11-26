@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientAddressesTable extends Migration
+class CreateCustomerAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateClientAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_addresses', function (Blueprint $table) {
+        Schema::create('customer_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->integer('address_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
@@ -28,6 +28,6 @@ class CreateClientAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('client_addresses');
+        Schema::drop('customer_addresses');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ClientAddressTest class.
+ * Contains the AddressesTest class.
  *
  * @copyright   Copyright (c) 2017 Attila Fulop
  * @author      Attila Fulop
@@ -10,31 +10,32 @@
  */
 
 
-namespace Konekt\Client\Tests;
+namespace Konekt\Customer\Tests;
 
 
 use Illuminate\Support\Collection;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\AddressType;
-use Konekt\Client\Models\Client;
-use Konekt\Client\Models\ClientProxy;
+use Konekt\Customer\Models\Customer;
+use Konekt\Customer\Models\CustomerProxy;
+use Konekt\Customer\Models\CustomerType;
 
-class ClientAddressTest extends TestCase
+class AddressesTest extends TestCase
 {
     /**
      * @test
      */
-    public function client_has_addresses_collection()
+    public function customer_has_addresses_collection()
     {
-        $client = ClientProxy::create([]);
+        $customer = CustomerProxy::create([]);
 
-        $this->assertInstanceOf(Collection::class, $client->addresses);
+        $this->assertInstanceOf(Collection::class, $customer->addresses);
     }
 
     /**
      * @test
      */
-    public function client_addresses_can_be_added()
+    public function customer_addresses_can_be_added()
     {
         $billing = AddressProxy::create([
             'name'       => 'Acme Inc.',
@@ -50,16 +51,17 @@ class ClientAddressTest extends TestCase
             'type'       => AddressType::SHIPPING
         ]);
 
-        $client = Client::create([
-            'organization_id' => $this->testData->acmeInc->id
+        $customer = Customer::create([
+            'type'         => CustomerType::ORGANIZATION,
+            'company_name' => 'Acme Inc.'
         ]);
 
-        $client->addresses()->save($billing);
-        $client->addresses()->save($shipping);
+        $customer->addresses()->save($billing);
+        $customer->addresses()->save($shipping);
 
-        $client = $client->fresh();
+        $customer = $customer->fresh();
 
-        $this->assertCount(2, $client->addresses);
+        $this->assertCount(2, $customer->addresses);
     }
     
 

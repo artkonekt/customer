@@ -1,13 +1,13 @@
-# Konekt Client Library (Laravel)
+# Konekt Customer Library (Laravel)
 
-[![Build Status](https://travis-ci.org/artkonekt/client.svg?branch=master)](https://travis-ci.org/artkonekt/client)
-[![Latest Stable Version](https://poser.pugx.org/konekt/client/version.svg)](https://packagist.org/packages/konekt/client)
-[![Total Downloads](https://poser.pugx.org/konekt/client/downloads.svg)](https://packagist.org/packages/konekt/client)
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![Travis Build Status](https://img.shields.io/travis/artkonekt/customer.svg?style=flat-square)](https://travis-ci.org/artkonekt/customer)
+[![Packagist version](https://img.shields.io/packagist/v/konekt/customer.svg?style=flat-square)](https://packagist.org/packages/konekt/customer)
+[![Packagist downloads](https://img.shields.io/packagist/dt/konekt/customer.svg?style=flat-square)](https://packagist.org/packages/konekt/customer)
+[![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-This is a [Concord](https://github.com/artkonekt/concord) module.
-
-If you don't know what this is, it's just too early.
+This is a [Concord](https://github.com/artkonekt/concord) module for
+handling customers. Designed to be basic and with later extension in
+mind.
 
 ## Runnig Tests
 

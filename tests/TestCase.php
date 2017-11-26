@@ -10,23 +10,20 @@
  */
 
 
-namespace Konekt\Client\Tests;
+namespace Konekt\Customer\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
-use Konekt\Address\Providers\ModuleServiceProvider as AddressModuleServiceProvider;
-use Konekt\Client\Providers\ModuleServiceProvider as ClientModuleServiceProvider;
+use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
+use Konekt\Customer\Providers\ModuleServiceProvider as CustomerModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Concord\Contracts\Concord;
-use Konekt\User\Providers\ModuleServiceProvider as UserModuleServiceProvider;
+use Konekt\User\Providers\ModuleServiceProvider as UserModule;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
     /** @var  Concord */
     protected $concord;
-
-    /** @var  TestData */
-    protected $testData;
 
     public function setUp()
     {
@@ -35,8 +32,6 @@ abstract class TestCase extends Orchestra
         $this->concord = $this->app->concord;
 
         $this->setUpDatabase($this->app);
-
-        $this->testData = new TestData();
     }
 
     /**
@@ -88,9 +83,9 @@ abstract class TestCase extends Orchestra
     {
         parent::resolveApplicationConfiguration($app);
         $app['config']->set('concord.modules', [
-            AddressModuleServiceProvider::class,
-            UserModuleServiceProvider::class,
-            ClientModuleServiceProvider::class
+            AddressModule::class,
+            UserModule::class,
+            CustomerModule::class
         ]);
     }
 
