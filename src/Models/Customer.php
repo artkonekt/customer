@@ -95,6 +95,11 @@ class Customer extends Model implements CustomerContract
         return $this->belongsToMany(AddressProxy::modelClass(), 'customer_addresses');
     }
 
+    protected function getNameAttribute()
+    {
+        return $this->getName();
+    }
+
     protected static function boot()
     {
         parent::boot();
