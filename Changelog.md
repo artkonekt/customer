@@ -3,6 +3,11 @@
 
 ## 0.9
 
+### 0.9.5
+##### 2018-01-10
+
+- The calculated Name can be accessed as property as well
+
 ### 0.9.4
 ##### 2017-12-11
 
