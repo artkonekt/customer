@@ -115,7 +115,7 @@ var_dump($acmeInc->type->isOrganization());
 ### With Concord
 
 Everything is already written in Concord docs at the
-[Models](https://artkonekt.github.io/concord/#/models) and the [Enums]() sections, so read that
+[Models](https://artkonekt.github.io/concord/#/models) and the [Enums](https://artkonekt.github.io/concord/#/enums) sections, so read that
 first if you haven't done that yet.
 
 #### Extending CustomerType
