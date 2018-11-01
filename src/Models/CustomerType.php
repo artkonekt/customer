@@ -32,5 +32,4 @@ class CustomerType extends Enum implements CustomerTypeContract
             self::INDIVIDUAL   => __('Individual')
         ];
     }
-
 }

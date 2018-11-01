@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Events;
 
-
 use Konekt\Customer\Contracts\CustomerAwareEvent;
 
 class BaseCustomerEvent implements CustomerAwareEvent
@@ -23,5 +22,4 @@ class BaseCustomerEvent implements CustomerAwareEvent
     {
         $this->customer = $customer;
     }
-
 }

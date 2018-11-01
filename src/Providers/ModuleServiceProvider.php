@@ -12,11 +12,9 @@
 
 namespace Konekt\Customer\Providers;
 
-
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerType;
 use Konekt\Concord\BaseModuleServiceProvider;
-
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
@@ -27,5 +25,4 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
         CustomerType::class
     ];
-
 }

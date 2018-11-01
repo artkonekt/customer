@@ -36,5 +36,4 @@ class CustomerTypeWasChanged extends BaseCustomerEvent
         $this->fromType      = $fromType;
         $this->oldAttributes = $oldAttributes;
     }
-
 }

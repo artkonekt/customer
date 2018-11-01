@@ -111,7 +111,7 @@ class Customer extends Model implements CustomerContract
     {
         parent::boot();
 
-        static::updated(function($customer) {
+        static::updated(function ($customer) {
             if ($customer->original['type'] != $customer->type) {
                 event(
                     new CustomerTypeWasChanged(
@@ -122,6 +122,5 @@ class Customer extends Model implements CustomerContract
                 );
             }
         });
-
     }
 }

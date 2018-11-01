@@ -12,8 +12,6 @@
 
 namespace Konekt\Customer\Contracts;
 
-
 interface CustomerType
 {
-
 }

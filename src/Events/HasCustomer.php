@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Events;
 
-
 use Konekt\Customer\Contracts\Customer;
 
 trait HasCustomer
@@ -27,5 +26,4 @@ trait HasCustomer
     {
         return $this->customer;
     }
-
 }

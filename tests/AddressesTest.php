@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Tests;
 
-
 use Illuminate\Support\Collection;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\AddressType;
@@ -63,6 +62,4 @@ class AddressesTest extends TestCase
 
         $this->assertCount(2, $customer->addresses);
     }
-    
-
 }

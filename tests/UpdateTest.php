@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Tests;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use Konekt\Customer\Events\CustomerTypeWasChanged;
@@ -50,7 +49,7 @@ class UpdateTest extends TestCase
 
         $acme = Customer::create([
             'company_name' => 'Acme Inc.',
-            'type' => CustomerType::ORGANIZATION
+            'type'         => CustomerType::ORGANIZATION
         ]);
 
         $acme->update(['company_name' => 'Events Dispatch Ltd.']);
@@ -91,7 +90,7 @@ class UpdateTest extends TestCase
     public function individual_customer_type_can_be_converted_to_organization()
     {
         $john = Customer::create([
-            'type' => CustomerType::INDIVIDUAL,
+            'type'      => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
             'lastname'  => 'Doe'
         ]);
@@ -116,7 +115,7 @@ class UpdateTest extends TestCase
         $this->expectsEvents(CustomerTypeWasChanged::class);
 
         $john = Customer::create([
-            'type' => CustomerType::INDIVIDUAL,
+            'type'      => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
             'lastname'  => 'Doe'
         ]);

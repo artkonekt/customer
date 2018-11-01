@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Contracts;
 
-
 interface Customer
 {
     /**
@@ -21,5 +20,4 @@ interface Customer
      * @return string
      */
     public function getName();
-
 }

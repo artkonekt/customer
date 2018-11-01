@@ -38,5 +38,4 @@ class ContractsTest extends TestCase
     {
         $this->assertEquals(Customer::class, CustomerProxy::modelClass());
     }
-
 }

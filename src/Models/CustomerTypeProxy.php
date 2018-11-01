@@ -12,10 +12,8 @@
 
 namespace Konekt\Customer\Models;
 
-
 use Konekt\Concord\Proxies\EnumProxy;
 
 class CustomerTypeProxy extends EnumProxy
 {
-
 }

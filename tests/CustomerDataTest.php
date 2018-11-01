@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Tests;
 
-
 use Carbon\Carbon;
 use Konekt\Address\Models\Gender;
 use Konekt\Address\Models\NameOrder;
@@ -36,7 +35,7 @@ class CustomerDataTest extends TestCase
         $this->assertEquals('John Doe', $john->getName());
 
         $acme = CustomerProxy::create([
-            'type' => CustomerType::ORGANIZATION,
+            'type'         => CustomerType::ORGANIZATION,
             'company_name' => 'Acme Inc.'
         ]);
 
@@ -114,5 +113,4 @@ class CustomerDataTest extends TestCase
         $this->assertEquals($shark->email, 'hey@sharksho.es');
         $this->assertEquals($shark->phone, '001555777444');
     }
-
 }

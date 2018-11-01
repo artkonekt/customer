@@ -23,7 +23,7 @@ class ConcordModuleTest extends TestCase
     {
         $modules = $this->concord
             ->getModules()
-            ->keyBy(function($module) {
+            ->keyBy(function ($module) {
                 return $module->getId();
             });
 
@@ -49,5 +49,4 @@ class ConcordModuleTest extends TestCase
             'The customer model should be present in Concord'
         );
     }
-
 }

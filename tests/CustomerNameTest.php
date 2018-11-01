@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Tests;
 
-
 use Konekt\Address\Models\NameOrder;
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerType;

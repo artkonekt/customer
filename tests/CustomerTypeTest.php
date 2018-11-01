@@ -12,7 +12,6 @@
 
 namespace Konekt\Customer\Tests;
 
-
 use Konekt\Customer\Contracts\CustomerType as CustomerTypeContract;
 use Konekt\Customer\Models\CustomerProxy;
 use Konekt\Customer\Models\CustomerType;
@@ -35,7 +34,6 @@ class CustomerTypeTest extends TestCase
 
         $individual = CustomerType::INDIVIDUAL();
         $this->assertTrue($individual->equals(CustomerTypeProxy::INDIVIDUAL()));
-
     }
 
     /**
@@ -48,5 +46,4 @@ class CustomerTypeTest extends TestCase
         $this->assertInstanceOf(CustomerTypeContract::class, $customer->type);
         $this->assertInstanceOf(Enum::class, $customer->type);
     }
-
 }
