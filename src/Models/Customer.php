@@ -23,13 +23,13 @@ use Konekt\Customer\Events\CustomerWasCreated;
 use Konekt\Customer\Events\CustomerWasUpdated;
 use Konekt\Enum\Eloquent\CastsEnums;
 
-
 /**
  * @property int               $id
  * @property CustomerType      $type
  * @property Organization|null $organization
  * @property Person|null       $person
  * @property bool              $is_active
+ * @property \DateTime         $last_purchase_at
  */
 class Customer extends Model implements CustomerContract
 {
@@ -40,7 +40,8 @@ class Customer extends Model implements CustomerContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active'        => 'boolean',
+        'last_purchase_at' => 'datetime'
     ];
 
     protected $enums = [
@@ -117,6 +118,4 @@ class Customer extends Model implements CustomerContract
         });
 
     }
-
-
 }

@@ -49,11 +49,12 @@ class CustomerDataTest extends TestCase
     public function all_individual_fields_can_be_set()
     {
         $giovanni = Customer::create([
-            'type'      => CustomerType::INDIVIDUAL(),
-            'firstname' => 'Giovanni',
-            'lastname'  => 'Gatto',
-            'email'     => 'giovanni.gatto@gattomail.club',
-            'phone'     => '+2-123-456-789'
+            'type'             => CustomerType::INDIVIDUAL(),
+            'firstname'        => 'Giovanni',
+            'lastname'         => 'Gatto',
+            'email'            => 'giovanni.gatto@gattomail.club',
+            'phone'            => '+2-123-456-789',
+            'last_purchase_at' => '2018-11-01 18:20:41'
         ]);
 
         $giovanni->fresh();
@@ -63,6 +64,31 @@ class CustomerDataTest extends TestCase
         $this->assertEquals($giovanni->lastname, 'Gatto');
         $this->assertEquals($giovanni->email, 'giovanni.gatto@gattomail.club');
         $this->assertEquals($giovanni->phone, '+2-123-456-789');
+        $this->assertEquals($giovanni->last_purchase_at->format('Y-m-d H:i:s'), '2018-11-01 18:20:41');
+    }
+
+    /** @test */
+    public function last_purchase_at_fields_type_is_either_null_or_date_time()
+    {
+        $good = Customer::create([
+            'type'             => CustomerType::INDIVIDUAL(),
+            'firstname'        => 'Buys',
+            'lastname'         => 'Stuff',
+            'last_purchase_at' => '2018-10-27 11:27:35'
+        ]);
+
+        $bad = Customer::create([
+            'type'             => CustomerType::INDIVIDUAL(),
+            'firstname'        => 'Buys No',
+            'lastname'         => 'Stuff'
+        ]);
+
+        $this->assertNull($bad->last_purchase_at);
+        $this->assertInstanceOf(\DateTime::class, $good->last_purchase_at);
+
+        // Repeat with refetched data
+        $this->assertNull($bad->fresh()->last_purchase_at);
+        $this->assertInstanceOf(\DateTime::class, $good->fresh()->last_purchase_at);
     }
 
     /**
