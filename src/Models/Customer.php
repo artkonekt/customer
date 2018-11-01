@@ -48,7 +48,13 @@ class Customer extends Model implements CustomerContract
         'type' => 'CustomerTypeProxy@enumClass'
     ];
 
+    // @todo: Drop this and break Laravel 5.4 compatibility
     protected $events = [
+        'created' => CustomerWasCreated::class,
+        'updated' => CustomerWasUpdated::class
+    ];
+
+    protected $dispatchesEvents = [
         'created' => CustomerWasCreated::class,
         'updated' => CustomerWasUpdated::class
     ];

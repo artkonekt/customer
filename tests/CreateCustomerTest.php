@@ -9,9 +9,7 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
-
 
 use Illuminate\Support\Facades\Event;
 use Konekt\Customer\Events\CustomerWasCreated;
@@ -101,17 +99,16 @@ class CreateCustomerTest extends TestCase
         $this->assertEquals('19995521', $acme->tax_nr);
     }
 
-    /**
-     * The event gets fired but expectsEvents doesn't detect it for some reason - disabled
-     * @ test
-     */
+    /** @test */
     public function customer_was_created_event_is_fired_on_create()
     {
-        $this->expectsEvents(CustomerWasCreated::class);
+        Event::fake();
 
         CustomerProxy::create([
             'type' => CustomerType::ORGANIZATION
         ]);
+
+        Event::assertDispatched(CustomerWasCreated::class);
     }
 
     /**
@@ -132,5 +129,4 @@ class CreateCustomerTest extends TestCase
                 && $event->getCustomer()->name == $acme->name;
         });
     }
-
 }

@@ -33,7 +33,6 @@ class ConcordModuleTest extends TestCase
 
         $this->assertTrue(
             $modules->get('konekt.customer')
-                    ->getManifest()
                     ->getKind()
                     ->isModule(),
             'Concord Module Type Should be a module'
