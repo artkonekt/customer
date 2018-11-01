@@ -6,8 +6,7 @@
 [![StyleCI](https://styleci.io/repos/112073400/shield?branch=master)](https://styleci.io/repos/112073400)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-This is a [Concord](https://github.com/artkonekt/concord) module for
-handling customers.
+This is a [Concord](https://github.com/artkonekt/concord) module for handling customers.
 
 Designed to:
 
@@ -33,6 +32,7 @@ return [
     ]
 ];
 ```
+
 > If there's no `concord.php` config file use this command:
 >
 > `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider" --tag=config`
@@ -45,9 +45,8 @@ php artisan migrate
 
 ### Without Concord
 
-OK, ok. You might be freaked out of this Concord thing.
-Then you can omit registering the service provider, but then the
-migrations won't be published, so copy them from
+OK, ok. You might be freaked out of this Concord thing. Then you can omit registering the service
+provider, but then the migrations won't be published, so copy them from
 `src/resorces/database/migrations/` to your app's migration folder.
 
 ## Usage
@@ -88,18 +87,19 @@ var_dump($acmeInc->type->isOrganization());
 
 ### Fields
 
-| Name            | Type                              | Notes                                                                                  |
-|:----------------|:----------------------------------|:---------------------------------------------------------------------------------------|
-| id              | autoinc                           |                                                                                        |
-| type            | CustomerType                      | enum                                                                                   |
-| email           | string                            |                                                                                        |
-| phone           | string(22)                        |                                                                                        |
-| firstname       | string                            |                                                                                        |
-| lastname        | string                            |                                                                                        |
-| company_name    | string                            |                                                                                        |
-| tax_nr          | string(17)                        | [Tax/VAT Identification Number](https://www.wikiwand.com/en/VAT_identification_number) |
-| registration_nr | Company/Trade Registration Number |                                                                                        |
-| is_active       | bool                              | true by default                                                                        |
+| Name             | Type                              | Notes                                                                                    |
+|:-----------------|:----------------------------------|:-----------------------------------------------------------------------------------------|
+| id               | autoinc                           |                                                                                          |
+| type             | CustomerType                      | enum                                                                                     |
+| email            | string                            |                                                                                          |
+| phone            | string(22)                        |                                                                                          |
+| firstname        | string                            |                                                                                          |
+| lastname         | string                            |                                                                                          |
+| company_name     | string                            |                                                                                          |
+| tax_nr           | string(17)                        | [Tax/VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number) |
+| registration_nr  | Company/Trade Registration Number |                                                                                          |
+| is_active        | bool                              | true by default                                                                          |
+| last_purchase_at | DateTime                          | nullable                                                                                 |
 
 ### Enums
 
@@ -115,13 +115,13 @@ var_dump($acmeInc->type->isOrganization());
 ### With Concord
 
 Everything is already written in Concord docs at the
-[Models](https://artkonekt.github.io/concord/#/models) and the
-[Enums]() sections, so read that first if you haven't done that yet.
+[Models](https://artkonekt.github.io/concord/#/models) and the [Enums]() sections, so read that
+first if you haven't done that yet.
 
 #### Extending CustomerType
 
-This is an [enum type](https://artkonekt.github.io/enum/#/) so if you
-want to add further variants, extend the class and define new consts:
+This is an [enum type](https://artkonekt.github.io/enum/#/) so if you want to add further variants,
+extend the class and define new consts:
 
 ```php
 // App\CustomerType.php
@@ -135,8 +135,7 @@ class CustomerType extends Konekt\Customer\Models\CustomerType
 }
 ```
 
-You need to register your type so that it will be used instead of the
-stock CustomerType:
+You need to register your type so that it will be used instead of the stock CustomerType:
 
 ```php
 // app/Providers/AppServiceProvider.php:
@@ -156,6 +155,7 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 So now your extended type is in effect:
+
 ```php
 use Konekt\Customer\Models\Customer;
 
@@ -208,8 +208,8 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-So now any other library using the Konekt Customer module will be aware
-of your new type and it will be used.
+So now any other library using the Konekt Customer module will be aware of your new type and it will
+be used.
 
 ```php
 use Konekt\Customer\Models\CustomerProxy;
@@ -234,8 +234,8 @@ echo $r2d2->getName();
 
 ### Without Concord
 
-If you're not using Concord and no other module/library depends on this
-module, just extend `Customer` with plain OOP and you're good to go.
+If you're not using Concord and no other module/library depends on this module, just extend
+`Customer` with plain OOP and you're good to go.
 
 Regarding to the automatic enum mapping refer to the
 [enum-eloquent readme](https://github.com/artkonekt/enum-eloquent#resolving-enum-class-runtime)
