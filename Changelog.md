@@ -3,6 +3,14 @@
 
 ## 0.9
 
+### 0.9.6
+##### 2018-11-01
+
+- Added `last_purchase_at` field to customers table
+- Minimum Concord version requirement is 1.0
+- Fixed model events incompatibility with Laravel 5.5+
+- Tested up to Laravel v5.7
+
 ### 0.9.5
 ##### 2018-01-10
 
