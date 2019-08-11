@@ -9,10 +9,8 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
 
-use Illuminate\Database\Schema\Blueprint;
 use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Customer\Providers\ModuleServiceProvider as CustomerModule;
 use Konekt\Concord\ConcordServiceProvider;
@@ -25,7 +23,7 @@ abstract class TestCase extends Orchestra
     /** @var  Concord */
     protected $concord;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -53,12 +51,21 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
+        $engine = env('TEST_DB_ENGINE', 'sqlite');
+
+        $app['config']->set('database.default', $engine);
+        $app['config']->set('database.connections.' . $engine, [
+            'driver'   => $engine,
+            'database' => 'sqlite' == $engine ? ':memory:' : 'customer_test',
             'prefix'   => '',
+            'host'     => '127.0.0.1',
+            'username' => env('TEST_DB_USERNAME', 'pgsql' === $engine ? 'postgres' : 'root'),
+            'password' => env('TEST_DB_PASSWORD', ''),
         ]);
+
+        if ('pgsql' === $engine) {
+            $app['config']->set("database.connections.{$engine}.charset", 'utf8');
+        }
     }
 
     /**
@@ -68,12 +75,9 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpDatabase($app)
     {
-        $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email');
-        });
-
-        \Artisan::call('migrate', ['--force' => true]);
+        $this->artisan('migrate:reset');
+        $this->loadLaravelMigrations();
+        $this->artisan('migrate', ['--force' => true]);
     }
 
     /**
