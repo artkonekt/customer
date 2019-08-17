@@ -1,6 +1,16 @@
 # Changelog
 ### Konekt Customer Module
 
+## 1.0
+
+### 1.0.0
+##### 2019-08-17
+
+- Removed PHP 7.0 support
+- Added PHP 7.3 support
+- Minimum Address module version is 1.0.1
+- Stability fixes
+
 ## 0.9
 
 ### 0.9.6
