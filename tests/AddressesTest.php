@@ -38,7 +38,7 @@ class AddressesTest extends TestCase
     public function customer_addresses_can_be_added()
     {
 
-        CountryProxy::create(['id' => 'US', 'name' => 'United States']);
+        CountryProxy::create(['id' => 'US', 'name' => 'United States', 'phonecode' => 1]);
 
         $billing = AddressProxy::create([
             'name'       => 'Acme Inc.',
