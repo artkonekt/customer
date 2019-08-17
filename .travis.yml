@@ -4,6 +4,7 @@ cache:
     - "$HOME/.composer/cache"
 matrix:
   include:
+##--- PHP 7.1 ---##
     - php: 7.1
       env: L5_VER=5
     - php: 7.1
@@ -16,6 +17,7 @@ matrix:
       env: L5_VER=7
     - php: 7.1
       env: L5_VER=8
+##--- PHP 7.2 ---##
     - php: 7.2
       env: L5_VER=5
     - php: 7.2
@@ -24,12 +26,17 @@ matrix:
       env: L5_VER=7
     - php: 7.2
       env: L5_VER=8
+##--- PHP 7.3 ---##
     - php: 7.3
       env: L5_VER=5
     - php: 7.3
       env: L5_VER=6
     - php: 7.3
       env: L5_VER=7
+    - php: 7.3
+      env: L5_VER=7 TEST_DB_ENGINE=mysql
+    - php: 7.3
+      env: L5_VER=7 TEST_DB_ENGINE=pgsql
     - php: 7.3
       env: L5_VER=8
     - php: 7.3
