@@ -15,6 +15,7 @@ namespace Konekt\Customer\Tests;
 use Illuminate\Support\Collection;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\AddressType;
+use Konekt\Address\Models\CountryProxy;
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerProxy;
 use Konekt\Customer\Models\CustomerType;
@@ -36,6 +37,9 @@ class AddressesTest extends TestCase
      */
     public function customer_addresses_can_be_added()
     {
+
+        CountryProxy::create(['id' => 'US', 'name' => 'United States']);
+
         $billing = AddressProxy::create([
             'name'       => 'Acme Inc.',
             'country_id' => 'US',
