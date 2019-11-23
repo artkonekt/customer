@@ -15,6 +15,7 @@ use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Customer\Providers\ModuleServiceProvider as CustomerModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Concord\Contracts\Concord;
+use Konekt\LaravelMigrationCompatibility\LaravelMigrationCompatibilityProvider;
 use Konekt\User\Providers\ModuleServiceProvider as UserModule;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -40,7 +41,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ConcordServiceProvider::class
+            ConcordServiceProvider::class,
+            LaravelMigrationCompatibilityProvider::class
         ];
     }
 
