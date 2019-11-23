@@ -1,8 +1,8 @@
 # Changelog
 ### Konekt Customer Module
 
-### Unreleased
-##### 2019-11-XX
+### 1.1.0
+##### 2019-11-23
 
 - Added Laravel 6 support
 - Removed Laravel 5.4 support
