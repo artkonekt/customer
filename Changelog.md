@@ -1,8 +1,8 @@
 # Changelog
 ### Konekt Customer Module
 
-### Unreleased
-##### 2020-03-XX
+### 1.2.0
+##### 2020-03-14
 
 - Added Laravel 7 support
 - Added PHP 7.4 support
