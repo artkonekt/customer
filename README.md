@@ -255,3 +255,6 @@ vendor/bin/phpunit -c phpunit.xml
 3. Choose composer autoloader (need to install deps in advance with `composer install`)
 4. Point "path to script" to `vendor/autoload.php` (full path)
 5. Choose default configuration file: `phpunit.xml`
+
+
+Thank You
