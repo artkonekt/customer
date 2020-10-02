@@ -27,7 +27,7 @@ class CreateCustomerTest extends TestCase
         $customer = CustomerProxy::create([])->fresh();
 
         $this->assertTrue($customer->is_active);
-        $this->assertEquals(CustomerType::__default, $customer->type->value());
+        $this->assertEquals(CustomerType::__DEFAULT, $customer->type->value());
     }
 
     /**

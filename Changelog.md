@@ -1,6 +1,15 @@
 # Changelog
 ### Konekt Customer Module
 
+## Unreleased
+##### 2020-XX-YY
+
+- BC: return type hints have been added to the interfaces
+- BC: Enums have been upgraded to v3
+- Added Laravel 8 support
+- Dropped Laravel 5 support
+- Dropped PHP 7.2 support
+
 ### 1.2.0
 ##### 2020-03-14
 

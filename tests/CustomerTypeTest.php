@@ -27,7 +27,7 @@ class CustomerTypeTest extends TestCase
     {
         $type = new CustomerType();
         $this->assertNotNull($type);
-        $this->assertEquals(CustomerType::__default, $type->value());
+        $this->assertEquals(CustomerType::__DEFAULT, $type->value());
 
         $org = CustomerType::ORGANIZATION();
         $this->assertTrue($org->equals(CustomerTypeProxy::ORGANIZATION()));

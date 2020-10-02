@@ -9,13 +9,9 @@
  *
  */
 
-
 namespace Konekt\Customer\Contracts;
 
 interface CustomerAwareEvent
 {
-    /**
-     * @return Customer
-     */
-    public function getCustomer();
+    public function getCustomer(): Customer;
 }

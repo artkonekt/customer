@@ -62,7 +62,7 @@ class Customer extends Model implements CustomerContract
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         if ($this->type->isOrganization()) {
             return $this->company_name;

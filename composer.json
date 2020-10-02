@@ -16,15 +16,16 @@
         "issues": "https://github.com/artkonekt/customer"
     },
     "require": {
-        "php": "^7.2",
-        "konekt/concord": "~1.5",
-        "konekt/user": "~1.4",
-        "konekt/address": "~1.2"
+        "php": "^7.3",
+        "konekt/concord": "~1.6",
+        "konekt/enum": "~3.0",
+        "konekt/user": "2.0.x-dev",
+        "konekt/address": "2.0.x-dev"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "orchestra/testbench": "~3.5|~4.0|~5.0",
-        "phpunit/phpunit" : "6.2 - 7.5|~8.0|~9.0",
+        "orchestra/testbench": "~4.0|~5.0|~6.0",
+        "phpunit/phpunit" : "~8.0|~9.0",
         "mockery/mockery": "^1.1"
     },
     "autoload": {

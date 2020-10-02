@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Models;
 
 use Konekt\Customer\Contracts\CustomerType as CustomerTypeContract;
@@ -17,7 +16,7 @@ use Konekt\Enum\Enum;
 
 class CustomerType extends Enum implements CustomerTypeContract
 {
-    const __default    = self::ORGANIZATION;
+    const __DEFAULT    = self::ORGANIZATION;
 
     const ORGANIZATION = 'organization';
     const INDIVIDUAL   = 'individual';
