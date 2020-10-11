@@ -17,10 +17,10 @@
     },
     "require": {
         "php": "^7.3",
-        "konekt/concord": "~1.6",
+        "konekt/concord": "^1.5.1",
         "konekt/enum": "~3.0",
-        "konekt/user": "2.0.x-dev",
-        "konekt/address": "2.0.x-dev"
+        "konekt/user": "^2.0",
+        "konekt/address": "^2.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",
