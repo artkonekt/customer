@@ -1,8 +1,8 @@
 # Changelog
 ### Konekt Customer Module
 
-## Unreleased
-##### 2020-XX-YY
+## 2.0.0
+##### 2020-10-11
 
 - BC: return type hints have been added to the interfaces
 - BC: Enums have been upgraded to v3
