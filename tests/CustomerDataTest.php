@@ -9,12 +9,8 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
 
-use Carbon\Carbon;
-use Konekt\Address\Models\Gender;
-use Konekt\Address\Models\NameOrder;
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerProxy;
 use Konekt\Customer\Models\CustomerType;

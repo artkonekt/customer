@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Events;
 
 class CustomerWasUpdated extends BaseCustomerEvent

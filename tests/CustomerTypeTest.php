@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
 
 use Konekt\Customer\Contracts\CustomerType as CustomerTypeContract;

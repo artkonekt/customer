@@ -21,7 +21,6 @@ class CustomerType extends Enum implements CustomerTypeContract
     const ORGANIZATION = 'organization';
     const INDIVIDUAL   = 'individual';
 
-
     protected static $labels = [];
 
     protected static function boot()

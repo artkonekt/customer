@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
 
 use Illuminate\Database\Eloquent\Model;
@@ -56,7 +55,7 @@ class UpdateTest extends TestCase
 
         Event::assertDispatched(CustomerWasUpdated::class, function ($event) use ($acme) {
             return $event->getCustomer()->id   == $acme->id
-                && $event->getCustomer()->getName() == 'Events Dispatch Ltd.';
+                && 'Events Dispatch Ltd.' == $event->getCustomer()->getName();
         });
     }
 
@@ -151,10 +150,9 @@ class UpdateTest extends TestCase
 
         $company = $john->fresh();
 
-
         Event::assertDispatched(CustomerTypeWasChanged::class, function ($event) use ($johnAttrs, $company) {
             return $event->getCustomer()->id   == $company->id
-                && $event->getCustomer()->getName() == 'Company Ltd.'
+                && 'Company Ltd.' == $event->getCustomer()->getName()
                 && CustomerType::INDIVIDUAL()->equals($event->fromType)
                 && $event->oldAttributes['firstname'] == $johnAttrs['firstname']
                 && $event->oldAttributes['lastname'] == $johnAttrs['lastname'];

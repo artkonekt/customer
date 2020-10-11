@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Providers;
 
 use Konekt\Customer\Models\Customer;

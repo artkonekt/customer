@@ -71,7 +71,6 @@ class Customer extends Model implements CustomerContract
         return sprintf('%s %s', $this->firstname, $this->lastname);
     }
 
-
     /**
      * Relation for person
      *

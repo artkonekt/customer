@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Events;
 
 use Konekt\Customer\Contracts\Customer;

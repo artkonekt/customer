@@ -9,7 +9,6 @@
  *
  */
 
-
 namespace Konekt\Customer\Tests;
 
 use Illuminate\Support\Collection;
