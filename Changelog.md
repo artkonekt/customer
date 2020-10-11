@@ -1,6 +1,11 @@
 # Changelog
 ### Konekt Customer Module
 
+## 2.0.1
+##### 2020-10-11
+
+- Fixed (slightly) invalid dependency versions in composer.json
+
 ## 2.0.0
 ##### 2020-10-11
 
