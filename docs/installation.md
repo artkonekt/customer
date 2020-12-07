@@ -2,7 +2,7 @@
 
 ## Laravel Compatibility
 
-| Laravel | Address   |
+| Laravel | Customer  |
 |:--------|:----------|
 | 5.4     | 0.9 - 1.0 |
 | 5.5     | 0.9 - 1.2 |
@@ -40,7 +40,7 @@ php artisan concord:modules -a
 +----+------------------------+--------+---------+------------------+-----------------+
 | #  | Name                   | Kind   | Version | Id               | Namespace       |
 +----+------------------------+--------+---------+------------------+-----------------+
-| 1. | Konekt Customer Module | Module | 2.0.1   | konekt.customer  | Konekt\Customer |
+| 1. | Konekt Customer Module | Module | 2.1.0   | konekt.customer  | Konekt\Customer |
 +----+------------------------+--------+---------+------------------+-----------------+
 ```
 
