@@ -1,6 +1,11 @@
 # Changelog
 ### Konekt Customer Module
 
+## Unreleased
+##### 2020-XX-YY
+
+- Added PHP 8 support
+
 ## 2.0.1
 ##### 2020-10-11
 

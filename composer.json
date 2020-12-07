@@ -16,7 +16,7 @@
         "issues": "https://github.com/artkonekt/customer"
     },
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 | ^8.0",
         "konekt/concord": "^1.5.1",
         "konekt/enum": "~3.0",
         "konekt/user": "^2.0",
