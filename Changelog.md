@@ -4,6 +4,7 @@
 ## Unreleased
 ##### 2022-03-XX
 
+- Added optional `timezone` field for customers
 - Added traits for composing models that belong to a customer
 
 ## 2.2.0

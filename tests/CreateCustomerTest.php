@@ -129,4 +129,14 @@ class CreateCustomerTest extends TestCase
                 && $event->getCustomer()->name == $acme->name;
         });
     }
+
+    /** @test */
+    public function customer_timezone_can_be_set()
+    {
+        $bamakan = Customer::create([
+            'timezone' => 'Africa/Bamako',
+        ])->fresh();
+
+        $this->assertEquals('Africa/Bamako', $bamakan->timezone);
+    }
 }
