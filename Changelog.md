@@ -1,6 +1,11 @@
 # Changelog
 ### Konekt Customer Module
 
+## Unreleased
+##### 2022-03-XX
+
+- Added traits for composing models that belong to a customer
+
 ## 2.2.0
 ##### 2022-03-10
 
