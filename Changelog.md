@@ -1,8 +1,8 @@
 # Changelog
 ### Konekt Customer Module
 
-## Unreleased
-##### 2022-03-XX
+## 2.3.0
+##### 2022-03-15
 
 - Added optional `timezone` field to customers
 - Added `currency` field to customers table
