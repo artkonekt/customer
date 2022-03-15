@@ -4,7 +4,9 @@
 ## Unreleased
 ##### 2022-03-XX
 
-- Added optional `timezone` field for customers
+- Added optional `timezone` field to customers
+- Added `currency` field to customers table
+- Added `ltv` (Customer Lifetime Value) field to customers table
 - Added traits for composing models that belong to a customer
 
 ## 2.2.0

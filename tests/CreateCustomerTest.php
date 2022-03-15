@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Contains the CreateCustomerTest class.
  *
@@ -131,12 +134,33 @@ class CreateCustomerTest extends TestCase
     }
 
     /** @test */
-    public function customer_timezone_can_be_set()
+    public function timezone_can_be_set()
     {
         $bamakan = Customer::create([
             'timezone' => 'Africa/Bamako',
         ])->fresh();
 
         $this->assertEquals('Africa/Bamako', $bamakan->timezone);
+    }
+
+    /** @test */
+    public function currency_can_be_set()
+    {
+        $japanese = Customer::create([
+            'currency' => 'JPY',
+        ])->fresh();
+
+        $this->assertEquals('JPY', $japanese->currency);
+    }
+
+    /** @test */
+    public function lifetime_value_can_be_set()
+    {
+        $japanese = Customer::create([
+            'ltv' => 2700.35,
+        ])->fresh();
+
+        $this->assertEquals(2700.35, $japanese->ltv);
+        $this->assertIsFloat($japanese->ltv);
     }
 }

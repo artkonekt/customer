@@ -27,21 +27,23 @@ use Konekt\Customer\Events\CustomerWasUpdated;
 use Konekt\Enum\Eloquent\CastsEnums;
 
 /**
- * @property int               $id
- * @property CustomerType      $type
- * @property string            $email
- * @property string            $phone
- * @property string            $firstname
- * @property string            $lastname
- * @property string            $company_name
- * @property string            $name
- * @property string            $tax_nr
- * @property string            $registration_nr
- * @property string            $timezone
+ * @property int $id
+ * @property CustomerType $type
+ * @property string $email
+ * @property string $phone
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $company_name
+ * @property string $name
+ * @property string $tax_nr
+ * @property string $registration_nr
+ * @property string $currency
+ * @property string $timezone
  * @property Organization|null $organization
- * @property Person|null       $person
- * @property bool              $is_active
- * @property Carbon|null       $last_purchase_at
+ * @property Person|null $person
+ * @property bool $is_active
+ * @property float $ltv
+ * @property Carbon|null $last_purchase_at
  *
  * @method static Customer create(array $attributes)
  */
@@ -54,17 +56,18 @@ class Customer extends Model implements CustomerContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'is_active'        => 'boolean',
-        'last_purchase_at' => 'datetime'
+        'is_active' => 'boolean',
+        'last_purchase_at' => 'datetime',
+        'ltv' => 'float',
     ];
 
     protected $enums = [
-        'type' => 'CustomerTypeProxy@enumClass'
+        'type' => 'CustomerTypeProxy@enumClass',
     ];
 
     protected $dispatchesEvents = [
         'created' => CustomerWasCreated::class,
-        'updated' => CustomerWasUpdated::class
+        'updated' => CustomerWasUpdated::class,
     ];
 
     public function getName(): string
