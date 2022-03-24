@@ -1,6 +1,11 @@
 # Changelog
 ### Konekt Customer Module
 
+## Unreleased
+##### 2022-03-XX
+
+- Fixed `down()` method of the migration added in 2.3.0 when running against an SQLite engine 
+
 ## 2.3.0
 ##### 2022-03-15
 

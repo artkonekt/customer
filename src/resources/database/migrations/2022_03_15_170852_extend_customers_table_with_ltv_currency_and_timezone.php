@@ -18,7 +18,11 @@ class ExtendCustomersTableWithLtvCurrencyAndTimezone extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('timezone');
+        });
+        Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('currency');
+        });
+        Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('ltv');
         });
     }
