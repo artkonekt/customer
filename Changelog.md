@@ -1,6 +1,12 @@
 # Changelog
 ### Konekt Customer Module
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added Laravel 10 support
+- Dropped Laravel 8 support
+
 ## 2.3.1
 ##### 2022-03-24
 
