@@ -74,7 +74,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: user_test
+          MYSQL_DATABASE: customer_test
         ports:
           - 3306
       postgres:
