@@ -1,6 +1,45 @@
 # Changelog
 ### Konekt Customer Module
 
+## 2.4.0
+##### 2023-02-17
+
+- Added Laravel 10 support
+- Dropped Laravel 8 support
+
+## 2.3.1
+##### 2022-03-24
+
+- Fixed `down()` method of the migration added in 2.3.0 when running against an SQLite engine
+
+## 2.3.0
+##### 2022-03-15
+
+- Added optional `timezone` field to customers
+- Added `currency` field to customers table
+- Added `ltv` (Customer Lifetime Value) field to customers table
+- Added traits for composing models that belong to a customer
+
+## 2.2.0
+##### 2022-03-10
+
+- Added Enum v4 support
+- Added Laravel 9 support
+- Dropped PHP 7.3 & 7.4 support
+- Dropped Laravel 6 & 7 support
+- Changed minimum Laravel version to 8.22.1, to enforce the [CVE-2021-21263](https://blog.laravel.com/security-laravel-62011-7302-8221-released) security patch
+- Changed CI from Travis to Github Actions
+
+## 2.1.0
+##### 2020-12-07
+
+- Added PHP 8 support
+
+## 2.0.1
+##### 2020-10-11
+
+- Fixed (slightly) invalid dependency versions in composer.json
+
 ## 2.0.0
 ##### 2020-10-11
 

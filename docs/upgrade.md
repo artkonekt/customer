@@ -1,5 +1,13 @@
 # Upgrade
 
+## 2.1 -> 2.2
+
+There are no breaking changes here, but bear in mind that, as of v2.2:
+
+- Minimum required PHP version is 8.0
+- Minimum required Laravel version is 8.22.1
+- [Enum v4 is supported](https://konekt.dev/enum/4.x/upgrade#from-v3-to-v4), but it's completely fine to stay with Enum v3.
+
 ## 1.x -> 2.x
 
 The new minimal requirements are:

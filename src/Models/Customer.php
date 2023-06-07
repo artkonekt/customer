@@ -11,7 +11,10 @@
 
 namespace Konekt\Customer\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Address\Models\Organization;
 use Konekt\Address\Models\OrganizationProxy;
@@ -24,12 +27,25 @@ use Konekt\Customer\Events\CustomerWasUpdated;
 use Konekt\Enum\Eloquent\CastsEnums;
 
 /**
- * @property int               $id
- * @property CustomerType      $type
+ * @property int $id
+ * @property CustomerType $type
+ * @property string $email
+ * @property string $phone
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $company_name
+ * @property string $name
+ * @property string $tax_nr
+ * @property string $registration_nr
+ * @property string $currency
+ * @property string $timezone
  * @property Organization|null $organization
- * @property Person|null       $person
- * @property bool              $is_active
- * @property \DateTime         $last_purchase_at
+ * @property Person|null $person
+ * @property bool $is_active
+ * @property float $ltv
+ * @property Carbon|null $last_purchase_at
+ *
+ * @method static Customer create(array $attributes)
  */
 class Customer extends Model implements CustomerContract
 {
@@ -41,27 +57,19 @@ class Customer extends Model implements CustomerContract
 
     protected $casts = [
         'is_active'        => 'boolean',
-        'last_purchase_at' => 'datetime'
+        'last_purchase_at' => 'datetime',
+        'ltv'              => 'float',
     ];
 
     protected $enums = [
-        'type' => 'CustomerTypeProxy@enumClass'
-    ];
-
-    // @todo: Drop this and break Laravel 5.4 compatibility
-    protected $events = [
-        'created' => CustomerWasCreated::class,
-        'updated' => CustomerWasUpdated::class
+        'type' => 'CustomerTypeProxy@enumClass',
     ];
 
     protected $dispatchesEvents = [
         'created' => CustomerWasCreated::class,
-        'updated' => CustomerWasUpdated::class
+        'updated' => CustomerWasUpdated::class,
     ];
 
-    /**
-     * @inheritdoc
-     */
     public function getName(): string
     {
         if ($this->type->isOrganization()) {
@@ -71,32 +79,17 @@ class Customer extends Model implements CustomerContract
         return sprintf('%s %s', $this->firstname, $this->lastname);
     }
 
-    /**
-     * Relation for person
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function person()
+    public function person(): BelongsTo
     {
         return $this->belongsTo(PersonProxy::modelClass());
     }
 
-    /**
-     * Relation for organization
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function organization()
+    public function organization(): BelongsTo
     {
         return $this->belongsTo(OrganizationProxy::modelClass());
     }
 
-    /**
-     * Relation for customer's addresses
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function addresses()
+    public function addresses(): BelongsToMany
     {
         return $this->belongsToMany(AddressProxy::modelClass(), 'customer_addresses');
     }

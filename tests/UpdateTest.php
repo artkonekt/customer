@@ -111,7 +111,10 @@ class UpdateTest extends TestCase
      */
     public function customer_type_was_changed_event_is_fired_on_type_conversion()
     {
-        $this->expectsEvents(CustomerTypeWasChanged::class);
+        /** @see https://github.com/laravel/framework/issues/18066#issuecomment-342630971 */
+        $initialDispatcher = Event::getFacadeRoot();
+        Event::fake();
+        Model::setEventDispatcher($initialDispatcher);
 
         $john = Customer::create([
             'type'      => CustomerType::INDIVIDUAL,
@@ -123,6 +126,8 @@ class UpdateTest extends TestCase
             'company_name' => 'Customers Sometimes Change Their Name Inc.',
             'type'         => CustomerType::ORGANIZATION
         ]);
+
+        Event::assertDispatched(CustomerTypeWasChanged::class);
     }
 
     /**
