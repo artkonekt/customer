@@ -67,9 +67,9 @@ class CreateCustomerTest extends TestCase
     public function individual_customer_can_be_created()
     {
         $john = CustomerProxy::create([
-            'type'      => CustomerType::INDIVIDUAL,
+            'type' => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
-            'lastname'  => 'Doe'
+            'lastname' => 'Doe'
         ]);
 
         $this->assertTrue($john->type->isIndividual());
@@ -93,9 +93,9 @@ class CreateCustomerTest extends TestCase
     public function org_customer_can_be_created()
     {
         $acme = CustomerProxy::create([
-            'type'         => CustomerType::ORGANIZATION,
+            'type' => CustomerType::ORGANIZATION,
             'company_name' => 'Acme Inc.',
-            'tax_nr'       => '19995521'
+            'tax_nr' => '19995521'
         ]);
 
         $this->assertEquals('Acme Inc.', $acme->company_name);
@@ -122,9 +122,9 @@ class CreateCustomerTest extends TestCase
         Event::fake();
 
         $acme = CustomerProxy::create([
-            'type'         => CustomerType::ORGANIZATION,
+            'type' => CustomerType::ORGANIZATION,
             'company_name' => 'Acme Inc.',
-            'tax_nr'       => '19995521'
+            'tax_nr' => '19995521'
         ]);
 
         Event::assertDispatched(CustomerWasCreated::class, function ($event) use ($acme) {

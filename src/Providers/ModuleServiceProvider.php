@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the ModuleServiceProvider class.
  *
@@ -11,9 +13,9 @@
 
 namespace Konekt\Customer\Providers;
 
+use Konekt\Concord\BaseModuleServiceProvider;
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerType;
-use Konekt\Concord\BaseModuleServiceProvider;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {

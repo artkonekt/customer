@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the AddressesTest class.
  *
@@ -37,28 +39,28 @@ class AddressesTest extends TestCase
     public function customer_addresses_can_be_added()
     {
         CountryProxy::create([
-            'id'           => 'US',
-            'name'         => 'United States',
-            'phonecode'    => 1,
+            'id' => 'US',
+            'name' => 'United States',
+            'phonecode' => 1,
             'is_eu_member' => false
         ]);
 
         $billing = AddressProxy::create([
-            'name'       => 'Acme Inc.',
+            'name' => 'Acme Inc.',
             'country_id' => 'US',
-            'address'    => 'HQ Street 2',
-            'type'       => AddressType::BILLING
+            'address' => 'HQ Street 2',
+            'type' => AddressType::BILLING
         ]);
 
         $shipping = AddressProxy::create([
-            'name'       => 'Acme Inc.',
+            'name' => 'Acme Inc.',
             'country_id' => 'US',
-            'address'    => 'Billing Street 1',
-            'type'       => AddressType::SHIPPING
+            'address' => 'Billing Street 1',
+            'type' => AddressType::SHIPPING
         ]);
 
         $customer = Customer::create([
-            'type'         => CustomerType::ORGANIZATION,
+            'type' => CustomerType::ORGANIZATION,
             'company_name' => 'Acme Inc.'
         ]);
 

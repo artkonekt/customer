@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CustomerType enum class.
  *
@@ -16,10 +18,10 @@ use Konekt\Enum\Enum;
 
 class CustomerType extends Enum implements CustomerTypeContract
 {
-    const __DEFAULT    = self::ORGANIZATION;
+    public const __DEFAULT = self::ORGANIZATION;
 
-    const ORGANIZATION = 'organization';
-    const INDIVIDUAL   = 'individual';
+    public const ORGANIZATION = 'organization';
+    public const INDIVIDUAL = 'individual';
 
     protected static $labels = [];
 
@@ -27,7 +29,7 @@ class CustomerType extends Enum implements CustomerTypeContract
     {
         static::$labels = [
             self::ORGANIZATION => __('Organization'),
-            self::INDIVIDUAL   => __('Individual')
+            self::INDIVIDUAL => __('Individual')
         ];
     }
 }

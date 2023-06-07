@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the UpdateTest class.
  *
@@ -29,7 +31,7 @@ class UpdateTest extends TestCase
 
         $customer = Customer::create([
             'company_name' => 'Mezzanine Ltd.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         $customer->update([
@@ -48,7 +50,7 @@ class UpdateTest extends TestCase
 
         $acme = Customer::create([
             'company_name' => 'Acme Inc.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         $acme->update(['company_name' => 'Events Dispatch Ltd.']);
@@ -66,13 +68,13 @@ class UpdateTest extends TestCase
     {
         $acme = Customer::create([
             'company_name' => 'Acme Inc.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         $acme->update([
-            'type'      => CustomerType::INDIVIDUAL,
+            'type' => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
-            'lastname'  => 'Doe'
+            'lastname' => 'Doe'
         ]);
 
         $johnDoe = $acme->fresh();
@@ -89,14 +91,14 @@ class UpdateTest extends TestCase
     public function individual_customer_type_can_be_converted_to_organization()
     {
         $john = Customer::create([
-            'type'      => CustomerType::INDIVIDUAL,
+            'type' => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
-            'lastname'  => 'Doe'
+            'lastname' => 'Doe'
         ]);
 
         $john->update([
             'company_name' => 'Acme Inc.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         $acme = $john->fresh();
@@ -117,14 +119,14 @@ class UpdateTest extends TestCase
         Model::setEventDispatcher($initialDispatcher);
 
         $john = Customer::create([
-            'type'      => CustomerType::INDIVIDUAL,
+            'type' => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
-            'lastname'  => 'Doe'
+            'lastname' => 'Doe'
         ]);
 
         $john->update([
             'company_name' => 'Customers Sometimes Change Their Name Inc.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         Event::assertDispatched(CustomerTypeWasChanged::class);
@@ -142,15 +144,15 @@ class UpdateTest extends TestCase
 
         $johnAttrs = [
             'firstname' => 'John',
-            'lastname'  => 'Doe',
-            'type'      => CustomerType::INDIVIDUAL
+            'lastname' => 'Doe',
+            'type' => CustomerType::INDIVIDUAL
         ];
 
         $john = Customer::create($johnAttrs);
 
         $john->update([
             'company_name' => 'Company Ltd.',
-            'type'         => CustomerType::ORGANIZATION
+            'type' => CustomerType::ORGANIZATION
         ]);
 
         $company = $john->fresh();

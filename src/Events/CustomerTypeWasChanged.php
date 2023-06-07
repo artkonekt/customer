@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CustomerTypeWasChanged class.
  *
@@ -32,7 +34,7 @@ class CustomerTypeWasChanged extends BaseCustomerEvent
     {
         parent::__construct($customer);
 
-        $this->fromType      = $fromType;
+        $this->fromType = $fromType;
         $this->oldAttributes = $oldAttributes;
     }
 }

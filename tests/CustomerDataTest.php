@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CustomerDataTest class.
  *
@@ -23,15 +25,15 @@ class CustomerDataTest extends TestCase
     public function get_name_method_resolves_customer_name_roperly_depending_on_type()
     {
         $john = CustomerProxy::create([
-            'type'      => CustomerType::INDIVIDUAL,
+            'type' => CustomerType::INDIVIDUAL,
             'firstname' => 'John',
-            'lastname'  => 'Doe'
+            'lastname' => 'Doe'
         ]);
 
         $this->assertEquals('John Doe', $john->getName());
 
         $acme = CustomerProxy::create([
-            'type'         => CustomerType::ORGANIZATION,
+            'type' => CustomerType::ORGANIZATION,
             'company_name' => 'Acme Inc.'
         ]);
 
@@ -44,11 +46,11 @@ class CustomerDataTest extends TestCase
     public function all_individual_fields_can_be_set()
     {
         $giovanni = Customer::create([
-            'type'             => CustomerType::INDIVIDUAL(),
-            'firstname'        => 'Giovanni',
-            'lastname'         => 'Gatto',
-            'email'            => 'giovanni.gatto@gattomail.club',
-            'phone'            => '+2-123-456-789',
+            'type' => CustomerType::INDIVIDUAL(),
+            'firstname' => 'Giovanni',
+            'lastname' => 'Gatto',
+            'email' => 'giovanni.gatto@gattomail.club',
+            'phone' => '+2-123-456-789',
             'last_purchase_at' => '2018-11-01 18:20:41'
         ]);
 
@@ -66,16 +68,16 @@ class CustomerDataTest extends TestCase
     public function last_purchase_at_fields_type_is_either_null_or_date_time()
     {
         $good = Customer::create([
-            'type'             => CustomerType::INDIVIDUAL(),
-            'firstname'        => 'Buys',
-            'lastname'         => 'Stuff',
+            'type' => CustomerType::INDIVIDUAL(),
+            'firstname' => 'Buys',
+            'lastname' => 'Stuff',
             'last_purchase_at' => '2018-10-27 11:27:35'
         ]);
 
         $bad = Customer::create([
-            'type'             => CustomerType::INDIVIDUAL(),
-            'firstname'        => 'Buys No',
-            'lastname'         => 'Stuff'
+            'type' => CustomerType::INDIVIDUAL(),
+            'firstname' => 'Buys No',
+            'lastname' => 'Stuff'
         ]);
 
         $this->assertNull($bad->last_purchase_at);
@@ -92,12 +94,12 @@ class CustomerDataTest extends TestCase
     public function all_organziation_customer_fields_can_be_set()
     {
         $shark = Customer::create([
-            'type'            => CustomerType::ORGANIZATION(),
-            'company_name'    => 'Shark Shoes & T-Shirts Inc.',
-            'tax_nr'          => 'SH123456',
+            'type' => CustomerType::ORGANIZATION(),
+            'company_name' => 'Shark Shoes & T-Shirts Inc.',
+            'tax_nr' => 'SH123456',
             'registration_nr' => 'SHARK-123',
-            'email'           => 'hey@sharksho.es',
-            'phone'           => '001555777444',
+            'email' => 'hey@sharksho.es',
+            'phone' => '001555777444',
         ]);
 
         $shark = $shark->fresh();

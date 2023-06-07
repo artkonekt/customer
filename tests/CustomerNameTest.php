@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the CustomerNameTest class.
  *
@@ -22,7 +24,7 @@ class CustomerNameTest extends TestCase
     public function get_name_method_properly_returns_company_name()
     {
         $fooBarInc = Customer::create([
-            'type'         => CustomerType::ORGANIZATION,
+            'type' => CustomerType::ORGANIZATION,
             'company_name' => 'Foo Bar Inc.'
         ]);
 
@@ -45,8 +47,8 @@ class CustomerNameTest extends TestCase
     public function get_name_returns_company_name_on_a_customer_having_person_name_but_being_organization()
     {
         $acmeJohnDoe = Customer::create([
-            'firstname'    => 'John',
-            'lastname'     => 'Doe',
+            'firstname' => 'John',
+            'lastname' => 'Doe',
             'company_name' => 'Acme Inc.'
         ]);
 
@@ -62,8 +64,8 @@ class CustomerNameTest extends TestCase
     {
         $jeremy = Customer::create([
             'firstname' => 'Jeremy',
-            'lastname'  => 'Fitzgerald',
-            'type'      => CustomerType::INDIVIDUAL
+            'lastname' => 'Fitzgerald',
+            'type' => CustomerType::INDIVIDUAL
         ]);
 
         $this->assertEquals('Jeremy Fitzgerald', $jeremy->getName());

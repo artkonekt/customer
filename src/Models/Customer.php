@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Contains the Customer model class.
  *
@@ -56,9 +58,9 @@ class Customer extends Model implements CustomerContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'is_active'        => 'boolean',
+        'is_active' => 'boolean',
         'last_purchase_at' => 'datetime',
-        'ltv'              => 'float',
+        'ltv' => 'float',
     ];
 
     protected $enums = [
