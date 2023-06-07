@@ -1,5 +1,13 @@
 # Upgrade
 
+## 2.x -> 3.x
+
+### Enum Interface
+
+The `CustomerType` interface extends the v4.1 `EnumInterface`, meaning it has more methods than before.
+It's almost certain that you don't need to do anything with it, because the base Enum class implements
+those methods. Regardless of that, it's a breaking change anyway.
+
 ## 2.1 -> 2.2
 
 There are no breaking changes here, but bear in mind that, as of v2.2:

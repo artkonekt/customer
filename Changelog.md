@@ -1,5 +1,15 @@
-# Changelog
-### Konekt Customer Module
+# Customer Module Changelog
+
+## Unreleased
+##### 2023-XX-YY
+
+- BC: Changed the `CustomerType` interface so that it now extends the `EnumInterface`
+- Dropped Laravel 9 support
+- Dropped PHP 8.0 support
+- Changed minimum version requirements to:
+    - Enum v4.1
+    - Address v3.0
+    - Doctrine DBAL v3.5.1
 
 ## 2.4.0
 ##### 2023-02-17

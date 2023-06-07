@@ -16,18 +16,18 @@
         "issues": "https://github.com/artkonekt/customer"
     },
     "require": {
-        "php": "^8.0",
-        "konekt/concord": "^1.10.2",
-        "konekt/enum": "^3.0|^4.0",
-        "konekt/user": "^2.1",
-        "konekt/address": "^2.1.2",
-        "laravel/framework": "^9.0|^10.0"
+        "php": "^8.1",
+        "konekt/concord": "^1.13",
+        "konekt/enum": "^4.1",
+        "konekt/user": "^3.0",
+        "konekt/address": "^3.0",
+        "laravel/framework": "^10.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "orchestra/testbench": "^7.0|^8.0",
-        "phpunit/phpunit" : "9 - 10",
-        "mockery/mockery": "^1.1"
+        "orchestra/testbench": "^8.0",
+        "phpunit/phpunit" : "^10.0",
+        "mockery/mockery": "^1.6.1"
     },
     "autoload": {
         "psr-4": { "Konekt\\Customer\\": "src"}
@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "3.0.x-dev"
         }
     }
 }

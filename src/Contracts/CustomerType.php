@@ -11,6 +11,8 @@
 
 namespace Konekt\Customer\Contracts;
 
-interface CustomerType
+use Konekt\Enum\EnumInterface;
+
+interface CustomerType extends EnumInterface
 {
 }
