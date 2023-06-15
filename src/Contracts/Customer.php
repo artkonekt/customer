@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Konekt\Customer\Contracts;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+
 interface Customer
 {
     /**
      * Returns the name of the customer (either company or person's name)
-     *
-     * @return string
      */
     public function getName(): string;
+
+    public function addresses(): MorphMany;
 }

@@ -4,6 +4,9 @@
 ##### 2023-XX-YY
 
 - BC: Changed the `CustomerType` interface so that it now extends the `EnumInterface`
+- BC: Added the `addresses()` method to the Customer interface
+- BC: Changed the `Address::addresses()` method from `BelongsToMany` to `MorphToMany` - the two are very compatible, but aren't the same
+- Dropped the `customer_addresses` table in favor of the Address module's `model()` polymorphic properties (migration included)
 - Dropped Laravel 9 support
 - Dropped PHP 8.0 support
 - Changed minimum version requirements to:

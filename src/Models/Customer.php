@@ -15,13 +15,8 @@ namespace Konekt\Customer\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Konekt\Address\Models\AddressProxy;
-use Konekt\Address\Models\Organization;
-use Konekt\Address\Models\OrganizationProxy;
-use Konekt\Address\Models\Person;
-use Konekt\Address\Models\PersonProxy;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Konekt\Customer\Events\CustomerTypeWasChanged;
 use Konekt\Customer\Events\CustomerWasCreated;
@@ -41,8 +36,6 @@ use Konekt\Enum\Eloquent\CastsEnums;
  * @property string $registration_nr
  * @property string $currency
  * @property string $timezone
- * @property Organization|null $organization
- * @property Person|null $person
  * @property bool $is_active
  * @property float $ltv
  * @property Carbon|null $last_purchase_at
@@ -81,19 +74,9 @@ class Customer extends Model implements CustomerContract
         return sprintf('%s %s', $this->firstname, $this->lastname);
     }
 
-    public function person(): BelongsTo
+    public function addresses(): MorphMany
     {
-        return $this->belongsTo(PersonProxy::modelClass());
-    }
-
-    public function organization(): BelongsTo
-    {
-        return $this->belongsTo(OrganizationProxy::modelClass());
-    }
-
-    public function addresses(): BelongsToMany
-    {
-        return $this->belongsToMany(AddressProxy::modelClass(), 'customer_addresses');
+        return $this->morphMany(AddressProxy::modelClass(), 'model');
     }
 
     protected function getNameAttribute()

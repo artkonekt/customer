@@ -23,9 +23,7 @@ use Konekt\Customer\Models\CustomerType;
 
 class AddressesTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function customer_has_addresses_collection()
     {
         $customer = CustomerProxy::create([]);
@@ -33,9 +31,7 @@ class AddressesTest extends TestCase
         $this->assertInstanceOf(Collection::class, $customer->addresses);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function customer_addresses_can_be_added()
     {
         CountryProxy::create([
