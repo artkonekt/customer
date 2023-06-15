@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -7,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Konekt\Customer\Models\CustomerProxy;
 
-return new class extends Migration {
+return new class () extends Migration {
     public function up(): void
     {
         $customerClass = morph_type_of(CustomerProxy::modelClass());
@@ -42,14 +44,14 @@ return new class extends Migration {
         DB::table('addresses')
             ->where('model_type', $customerClass)
             ->select(['id', 'model_id'])
-            ->chunkById(1000, function(Collection $addresses) {
-               foreach ($addresses as $address) {
-                   DB::table('customer_addresses')
-                       ->insert([
-                           'address_id' => $address->id,
-                           'customer_id' => $address->model_id,
-                       ]);
-               }
+            ->chunkById(1000, function (Collection $addresses) {
+                foreach ($addresses as $address) {
+                    DB::table('customer_addresses')
+                        ->insert([
+                            'address_id' => $address->id,
+                            'customer_id' => $address->model_id,
+                        ]);
+                }
             });
     }
 };
