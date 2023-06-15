@@ -31,7 +31,7 @@ jobs:
         run: php vendor/bin/phpunit --testdox
         env:
           TEST_DB_ENGINE: sqlite
-      - name: Run Tests [mysql]
+      - name: Run Tests [mysql 5.7]
         run: php vendor/bin/phpunit --testdox
         env:
           TEST_DB_ENGINE: mysql

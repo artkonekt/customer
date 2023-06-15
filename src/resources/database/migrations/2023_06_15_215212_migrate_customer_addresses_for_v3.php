@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +15,7 @@ return new class () extends Migration {
         DB::table('customer_addresses')
             ->whereNull('deleted_at')
             ->select(['id', 'customer_id', 'address_id'])
-            ->chunkById(1000, function (Collection $customerAddresses) use ($customerClass) {
+            ->chunkById(1000, function ($customerAddresses) use ($customerClass) {
                 foreach ($customerAddresses as $customerAddress) {
                     DB::table('addresses')
                         ->where('id', $customerAddress->address_id)
@@ -44,7 +43,7 @@ return new class () extends Migration {
         DB::table('addresses')
             ->where('model_type', $customerClass)
             ->select(['id', 'model_id'])
-            ->chunkById(1000, function (Collection $addresses) {
+            ->chunkById(1000, function ($addresses) {
                 foreach ($addresses as $address) {
                     DB::table('customer_addresses')
                         ->insert([
