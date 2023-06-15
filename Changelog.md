@@ -9,6 +9,7 @@
 - Dropped the `customer_addresses` table in favor of the Address module's `model()` polymorphic properties (migration included)
 - Dropped Laravel 9 support
 - Dropped PHP 8.0 support
+- Added the registration of `customer` to the relation morph map
 - Changed minimum version requirements to:
     - Enum v4.1
     - Address v3.0

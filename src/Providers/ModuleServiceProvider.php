@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Konekt\Customer\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Konekt\Customer\Models\Customer;
+use Konekt\Customer\Models\CustomerProxy;
 use Konekt\Customer\Models\CustomerType;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
@@ -26,4 +28,13 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $enums = [
         CustomerType::class
     ];
+
+    public function boot(): void
+    {
+        parent::boot();
+
+        Relation::morphMap([
+            'customer' => CustomerProxy::modelClass(),
+        ]);
+    }
 }
