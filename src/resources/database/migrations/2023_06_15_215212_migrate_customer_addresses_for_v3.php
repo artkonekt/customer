@@ -42,13 +42,15 @@ return new class () extends Migration {
         $customerClass = morph_type_of(CustomerProxy::modelClass());
         DB::table('addresses')
             ->where('model_type', $customerClass)
-            ->select(['id', 'model_id'])
+            ->select(['id', 'model_id', 'created_at'])
             ->chunkById(1000, function ($addresses) {
                 foreach ($addresses as $address) {
                     DB::table('customer_addresses')
                         ->insert([
                             'address_id' => $address->id,
                             'customer_id' => $address->model_id,
+                            'created_at' => $address->created_at,
+                            'updated_at' => now(),
                         ]);
                 }
             });
