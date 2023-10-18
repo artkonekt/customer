@@ -15,10 +15,17 @@ declare(strict_types=1);
 namespace Konekt\Customer\Tests;
 
 use Konekt\Address\Models\Address;
+use Konekt\Address\Models\Country;
 use Konekt\Customer\Models\Customer;
 
 class AddressDefaultsTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        Country::firstOrCreate(['id' => 'UK'], ['id' => 'UK', 'name' => 'United Kingdom', 'phonecode' => '44', 'is_eu_member' => false]);
+    }
+
     /** @test */
     public function customer_has_no_default_addresses_by_default()
     {

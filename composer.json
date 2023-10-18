@@ -21,6 +21,7 @@
         "konekt/enum": "^4.1",
         "konekt/user": "^3.0",
         "konekt/address": "^3.0",
+        "konekt/laravel-migration-compatibility": "^1.6",
         "laravel/framework": "^10.0"
     },
     "require-dev": {
