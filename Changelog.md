@@ -18,6 +18,7 @@
 - Dropped PHP 8.0 support
 - Added the `default_billing_address_id` and the `default_shipping_address_id` fields to the customer table/model
 - Added the registration of `customer` to the relation morph map
+- Added PHP 8.3 support
 - Changed minimum version requirements to:
     - Enum v4.1
     - Address v3.0
