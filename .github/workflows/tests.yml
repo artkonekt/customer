@@ -32,7 +32,7 @@ jobs:
         env:
           TEST_DB_ENGINE: sqlite
       - name: Run Tests [mysql 5.7]
-        run: php vendor/bin/phpunit --testdox --debug
+        run: php vendor/bin/phpunit
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql.ports[3306] }}
