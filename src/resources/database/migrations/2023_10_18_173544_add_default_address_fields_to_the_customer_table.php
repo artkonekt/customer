@@ -10,8 +10,8 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('default_billing_address_id')->nullable();
-            $table->unsignedBigInteger('default_shipping_address_id')->nullable();
+            $table->unsignedInteger('default_billing_address_id')->nullable();
+            $table->unsignedInteger('default_shipping_address_id')->nullable();
 
             $table->foreign('default_billing_address_id')->references('id')->on('addresses')->nullOnDelete();
             $table->foreign('default_shipping_address_id')->references('id')->on('addresses')->nullOnDelete();
