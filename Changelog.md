@@ -4,11 +4,19 @@
 ##### 2023-XX-YY
 
 - BC: Changed the `CustomerType` interface so that it now extends the `EnumInterface`
-- BC: Added the `addresses()` method to the Customer interface
+- BC: Added the following methods to the Customer interface:
+  - `addresses()`
+  - `hasDefaultBillingAddress()`
+  - `hasDefaultShippingAddress()`
+  - `defaultBillingAddress()`
+  - `defaultShippingAddress()`
+  - `setDefaultShippingAddress()`
+  - `setDefaultBillingAddress()`
 - BC: Changed the `Address::addresses()` method from `BelongsToMany` to `MorphToMany` - the two are very compatible, but aren't the same
 - Dropped the `customer_addresses` table in favor of the Address module's `model()` polymorphic properties (migration included)
 - Dropped Laravel 9 support
 - Dropped PHP 8.0 support
+- Added the `default_billing_address_id` and the `default_shipping_address_id` fields to the customer table/model
 - Added the registration of `customer` to the relation morph map
 - Changed minimum version requirements to:
     - Enum v4.1

@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Konekt\Customer\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Konekt\Address\Contracts\Address;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
 use Konekt\Customer\Events\CustomerTypeWasChanged;
@@ -39,6 +41,12 @@ use Konekt\Enum\Eloquent\CastsEnums;
  * @property bool $is_active
  * @property float $ltv
  * @property Carbon|null $last_purchase_at
+ * @property int|null $default_billing_address_id
+ * @property int|null $default_shipping_address_id
+ *
+ * @property-read Collection|Address[] $addresses
+ * @property-read Address|null $default_billing_address
+ * @property-read Address|null $default_shipping_address
  *
  * @method static Customer create(array $attributes)
  */
@@ -74,6 +82,38 @@ class Customer extends Model implements CustomerContract
         return sprintf('%s %s', $this->firstname, $this->lastname);
     }
 
+    public function hasDefaultBillingAddress(): bool
+    {
+        return null !== $this->default_billing_address_id;
+    }
+
+    public function hasDefaultShippingAddress(): bool
+    {
+        return null !== $this->default_shipping_address_id;
+    }
+
+    public function defaultBillingAddress(): ?Address
+    {
+        return $this->default_billing_address;
+    }
+
+    public function defaultShippingAddress(): ?Address
+    {
+        return $this->default_shipping_address;
+    }
+
+    public function setDefaultShippingAddress(Address|int|null $address): void
+    {
+        $value = $address instanceof Address ? $address->id : $address;
+        $this->update(['default_shipping_address_id' => $value]);
+    }
+
+    public function setDefaultBillingAddress(Address|int|null $address): void
+    {
+        $value = $address instanceof Address ? $address->id : $address;
+        $this->update(['default_billing_address_id' => $value]);
+    }
+
     public function addresses(): MorphMany
     {
         return $this->morphMany(AddressProxy::modelClass(), 'model');
@@ -88,12 +128,15 @@ class Customer extends Model implements CustomerContract
     {
         parent::boot();
 
+        static::resolveRelationUsing('default_shipping_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_shipping_address_id'));
+        static::resolveRelationUsing('default_billing_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_billing_address_id'));
+
         static::updated(function ($customer) {
-            if ($customer->original['type'] != $customer->type) {
+            if ($customer->original['type'] ?? null !== $customer->type) {
                 event(
                     new CustomerTypeWasChanged(
                         $customer,
-                        CustomerTypeProxy::create($customer->original['type']),
+                        CustomerTypeProxy::create($customer->original['type'] ?? null),
                         $customer->original
                     )
                 );
