@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Konekt\Customer\Tests;
 
-use Illuminate\Support\Collection;
 use Konekt\Address\Models\Address;
 use Konekt\Customer\Models\Customer;
 

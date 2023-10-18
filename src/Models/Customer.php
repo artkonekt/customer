@@ -128,8 +128,8 @@ class Customer extends Model implements CustomerContract
     {
         parent::boot();
 
-        static::resolveRelationUsing('default_shipping_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_shipping_address_id'));
-        static::resolveRelationUsing('default_billing_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_billing_address_id'));
+        static::resolveRelationUsing('default_shipping_address', fn ($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_shipping_address_id'));
+        static::resolveRelationUsing('default_billing_address', fn ($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_billing_address_id'));
 
         static::updated(function ($customer) {
             if ($customer->original['type'] ?? null !== $customer->type) {
