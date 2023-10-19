@@ -23,8 +23,11 @@ return new class () extends Migration {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropForeign('customers_default_billing_address_id_foreign');
             $table->dropForeign('customers_default_shipping_address_id_foreign');
-
+        });
+        Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('default_billing_address_id');
+        });
+        Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('default_shipping_address_id');
         });
     }
