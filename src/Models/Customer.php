@@ -75,7 +75,7 @@ class Customer extends Model implements CustomerContract
 
     public function getName(): string
     {
-        if ($this->type->isOrganization()) {
+        if ($this->type->isOrganization() && !is_null($this->company_name)) {
             return $this->company_name;
         }
 

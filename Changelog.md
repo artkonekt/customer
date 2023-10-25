@@ -16,6 +16,7 @@
 - Dropped the `customer_addresses` table in favor of the Address module's `model()` polymorphic properties (migration included)
 - Dropped Laravel 9 support
 - Dropped PHP 8.0 support
+- Fixed a possible type error in the `Customer::getName()` method
 - Added the `default_billing_address_id` and the `default_shipping_address_id` fields to the customer table/model
 - Added the registration of `customer` to the relation morph map
 - Added PHP 8.3 support
