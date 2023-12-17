@@ -42,7 +42,7 @@ php artisan concord:modules -a
 +----+------------------------+--------+---------+------------------+-----------------+
 | #  | Name                   | Kind   | Version | Id               | Namespace       |
 +----+------------------------+--------+---------+------------------+-----------------+
-| 1. | Konekt Customer Module | Module | 2.4.0   | konekt.customer  | Konekt\Customer |
+| 1. | Konekt Customer Module | Module | 2.4.1   | konekt.customer  | Konekt\Customer |
 +----+------------------------+--------+---------+------------------+-----------------+
 ```
 
