@@ -25,6 +25,11 @@
     - Address v3.0
     - Doctrine DBAL v3.5.1
 
+## 2.4.1
+##### 2023-12-17
+
+- Added PHP 8.3 support
+
 ## 2.4.0
 ##### 2023-02-17
 

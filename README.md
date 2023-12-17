@@ -1,6 +1,6 @@
 # Customer Library (Laravel)
 
-[![Tests](https://img.shields.io/github/workflow/status/artkonekt/customer/tests/2.x?style=flat-square)](https://github.com/artkonekt/customer/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/artkonekt/customer/tests.yml?branch=2.x&style=flat-square)](https://github.com/artkonekt/customer/actions?query=workflow%3Atests)
 [![Packagist version](https://img.shields.io/packagist/v/konekt/customer.svg?style=flat-square)](https://packagist.org/packages/konekt/customer)
 [![Packagist downloads](https://img.shields.io/packagist/dt/konekt/customer.svg?style=flat-square)](https://packagist.org/packages/konekt/customer)
 [![StyleCI](https://styleci.io/repos/112073400/shield?branch=master)](https://styleci.io/repos/112073400)
