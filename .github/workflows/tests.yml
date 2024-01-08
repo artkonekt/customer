@@ -27,7 +27,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}.*" --no-update -v
           is_smaller_version() [[ $(echo -e "$1\n$2"|sort -V|head -1) != $2 ]]
-          is_smaller_version "${{ matrix.laravel }}" "10.38.2" && composer req "doctrine/dbal:^3.5.1" --no-update
+          is_smaller_version "${{ matrix.laravel }}" "10.38.2" && composer req "doctrine/dbal:^3.5.1" --no-update || true
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Create SQLite Database
