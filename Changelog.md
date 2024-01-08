@@ -20,10 +20,11 @@
 - Added the `default_billing_address_id` and the `default_shipping_address_id` fields to the customer table/model
 - Added the registration of `customer` to the relation morph map
 - Added PHP 8.3 support
+- Added Laravel 11 support
 - Changed minimum version requirements to:
     - Enum v4.1
     - Address v3.0
-    - Doctrine DBAL v3.5.1
+    - Doctrine DBAL v3.5.1/v4.0
 
 ## 2.4.1
 ##### 2023-12-17
