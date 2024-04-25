@@ -6,7 +6,7 @@
 [![StyleCI](https://styleci.io/repos/112073400/shield?branch=master)](https://styleci.io/repos/112073400)
 [![MIT Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
-This is a [Concord](https://github.com/artkonekt/concord) module for handling customers.
+This is a [Concord](https://konekt.dev/concord) module for handling customers.
 
 Designed to:
 
