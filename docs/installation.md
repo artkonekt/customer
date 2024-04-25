@@ -9,17 +9,18 @@
 | 5.6     | 0.9 - 1.2 |
 | 5.7     | 0.9 - 1.2 |
 | 5.8     | 1.0 - 1.2 |
-| 6.x     | 1.1+      |
-| 7.x     | 1.2+      |
-| 8.x     | 2.0+      |
-| 9.x     | 2.2+      |
+| 6.x     | 1.1 - 2.1 |
+| 7.x     | 1.2 - 2.1 |
+| 8.x     | 2.0 - 2.3 |
+| 9.x     | 2.2 - 2.4 |
 | 10.x    | 2.4+      |
+| 11.x    | 3.0+      |
 
 
 ## Installation With Composer
 
-1. `composer require konekt/address`
-2. Edit `config/concord.php` and add the address module:
+1. `composer require konekt/customer`
+2. Edit `config/concord.php` and add the customer module:
 
 ```php
 return [
@@ -34,7 +35,7 @@ return [
 > `php artisan vendor:publish --provider="Konekt\Concord\ConcordServiceProvider" --tag=config`
 
 
-After this, address should be listed among the concord modules:
+After this, customer should be listed among the concord modules:
 
 ```
 php artisan concord:modules -a
@@ -42,7 +43,7 @@ php artisan concord:modules -a
 +----+------------------------+--------+---------+------------------+-----------------+
 | #  | Name                   | Kind   | Version | Id               | Namespace       |
 +----+------------------------+--------+---------+------------------+-----------------+
-| 1. | Konekt Customer Module | Module | 2.4.1   | konekt.customer  | Konekt\Customer |
+| 1. | Konekt Customer Module | Module | 3.0.0   | konekt.customer  | Konekt\Customer |
 +----+------------------------+--------+---------+------------------+-----------------+
 ```
 

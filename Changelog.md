@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2023-XX-YY
+## 3.0.0
+##### 2024-04-25
 
 - BC: Changed the `CustomerType` interface so that it now extends the `EnumInterface`
 - BC: Added the following methods to the Customer interface:
