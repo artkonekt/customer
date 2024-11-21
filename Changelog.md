@@ -1,5 +1,10 @@
 # Customer Module Changelog
 
+## Unreleased
+##### 2024-XX-YY
+
+- Added CustomerPurchases
+
 ## 3.0.0
 ##### 2024-04-25
 

@@ -17,12 +17,14 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Konekt\Concord\BaseModuleServiceProvider;
 use Konekt\Customer\Models\Customer;
 use Konekt\Customer\Models\CustomerProxy;
+use Konekt\Customer\Models\CustomerPurchase;
 use Konekt\Customer\Models\CustomerType;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        Customer::class
+        Customer::class,
+        CustomerPurchase::class,
     ];
 
     protected $enums = [
