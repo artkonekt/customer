@@ -19,8 +19,8 @@ use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
  * @property int $purchasable_id
  * @property string $purchasable_type
  *
- * @method static MorphTo purchasable()
- * @method static BelongsTo customer()
+ * @property-read Model $purchasable
+ * @property-read Customer $customer
  */
 class CustomerPurchase extends Model implements CustomerPurchaseContract
 {
