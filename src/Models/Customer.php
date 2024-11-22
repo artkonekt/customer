@@ -16,6 +16,7 @@ namespace Konekt\Customer\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Konekt\Address\Contracts\Address;
 use Konekt\Address\Models\AddressProxy;
@@ -117,6 +118,11 @@ class Customer extends Model implements CustomerContract
     public function addresses(): MorphMany
     {
         return $this->morphMany(AddressProxy::modelClass(), 'model');
+    }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(CustomerPurchaseProxy::modelClass());
     }
 
     protected function getNameAttribute()
