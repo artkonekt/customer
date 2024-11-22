@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->integer('customer_id')->unsigned();
             $table->date('purchase_date')->nullable();
-            $table->decimal('purchase_value')->nullable();
+            $table->decimal('purchase_value', 15, 4)->nullable();
             $table->char('currency', 3)->nullable();
             $table->morphs('purchasable');
             $table->timestamps();
