@@ -14,12 +14,17 @@ return new class () extends Migration {
     {
         Schema::create('customer_purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->integer('customer_id')->unsigned();
             $table->date('purchase_date')->nullable();
             $table->decimal('purchase_value')->nullable();
             $table->char('currency', 3)->nullable();
             $table->morphs('purchasable');
             $table->timestamps();
+
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers')
+                ->onDelete('cascade');
         });
     }
 
