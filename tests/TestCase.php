@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Konekt\Customer\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Konekt\Address\Providers\ModuleServiceProvider as AddressModule;
 use Konekt\Concord\ConcordServiceProvider;
 use Konekt\Concord\Contracts\Concord;
@@ -85,11 +86,13 @@ abstract class TestCase extends Orchestra
         $this->loadLaravelMigrations();
         $this->artisan('migrate', ['--force' => true]);
 
-        $app['db']->connection()->getSchemaBuilder()->create('orders', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('number', 32);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('orders')) {
+            $app['db']->connection()->getSchemaBuilder()->create('orders', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('number', 32);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
