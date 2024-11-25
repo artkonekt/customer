@@ -1,9 +1,9 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2024-XX-YY
+## 3.1.0
+##### 2024-11-25
 
-- Added CustomerPurchases
+- Added the Customer purchases table and model
 
 ## 3.0.0
 ##### 2024-04-25
