@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2024-XX-YY
+## 3.2.0
+##### 2024-12-14
 
 - Fixed an SQLite migration error with Laravel 11.15+
 - Added PHP 8.4 support
