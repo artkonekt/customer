@@ -13,8 +13,10 @@ return new class () extends Migration {
             $table->intOrBigIntBasedOnRelated('default_billing_address_id', Schema::connection(null), 'addresses.id')->nullable();
             $table->intOrBigIntBasedOnRelated('default_shipping_address_id', Schema::connection(null), 'addresses.id')->nullable();
 
-            $table->foreign('default_billing_address_id')->references('id')->on('addresses')->nullOnDelete();
-            $table->foreign('default_shipping_address_id')->references('id')->on('addresses')->nullOnDelete();
+            if (!$this->isSqlite()) {
+                $table->foreign('default_billing_address_id')->references('id')->on('addresses')->nullOnDelete();
+                $table->foreign('default_shipping_address_id')->references('id')->on('addresses')->nullOnDelete();
+            }
         });
     }
 
