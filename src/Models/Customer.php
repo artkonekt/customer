@@ -44,6 +44,7 @@ use Konekt\Enum\Eloquent\CastsEnums;
  * @property Carbon|null $last_purchase_at
  * @property int|null $default_billing_address_id
  * @property int|null $default_shipping_address_id
+ * @property string|null $customer_number
  *
  * @property-read Collection|Address[] $addresses
  * @property-read Address|null $default_billing_address
