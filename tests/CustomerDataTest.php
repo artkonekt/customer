@@ -111,4 +111,21 @@ class CustomerDataTest extends TestCase
         $this->assertEquals($shark->email, 'hey@sharksho.es');
         $this->assertEquals($shark->phone, '001555777444');
     }
+
+    /**
+     * @test
+     */
+    public function customer_number_field_can_be_written_and_read(): void
+    {
+        $customer = Customer::create([
+            'type' => CustomerType::INDIVIDUAL(),
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'customer_number' => '1337',
+        ]);
+
+        $customer = $customer->fresh();
+
+        $this->assertEquals('1337', $customer->customer_number);
+    }
 }
