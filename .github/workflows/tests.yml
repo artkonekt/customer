@@ -9,12 +9,12 @@ jobs:
     strategy:
       matrix:
         php: ['8.1', '8.2', '8.3', '8.4']
-        laravel: ['10.0', '10.48', '11.0', '11.35']
+        laravel: ['10.0', '10.48', '11.0', '11.37']
         exclude:
           - php: '8.1'
             laravel: '11.0'
           - php: '8.1'
-            laravel: '11.35'
+            laravel: '11.37'
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
