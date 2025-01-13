@@ -18,8 +18,13 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('customer_purchases', function (Blueprint $table) {
-            //$table->unsignedBigInteger('purchasable_id')->nullable(false)->change();
-            //$table->string('purchasable_type')->nullable(false)->change();
+            // We're not reversing this because it will fail if there are any records in the table where the
+            // purchasable id/type are NULL. But we do not even throw an irreversible migration exception
+            // to avoid failing the CI tests. The chances of having a real life scenario for reverting
+            // this migration are very low. If it happens to be your case, then open a GitHub issue
+
+            // $table->unsignedBigInteger('purchasable_id')->nullable(false)->change();
+            // $table->string('purchasable_type')->nullable(false)->change();
         });
     }
 };
