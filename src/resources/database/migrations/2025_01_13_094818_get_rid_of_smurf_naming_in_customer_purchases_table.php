@@ -11,6 +11,9 @@ return new class () extends Migration {
     {
         Schema::table('customer_purchases', function (Blueprint $table) {
             $table->renameColumn('purchase_date', 'date');
+        });
+
+        Schema::table('customer_purchases', function (Blueprint $table) {
             $table->renameColumn('purchase_value', 'value');
         });
     }
@@ -19,6 +22,9 @@ return new class () extends Migration {
     {
         Schema::table('customer_purchases', function (Blueprint $table) {
             $table->renameColumn('date', 'purchase_date');
+        });
+
+        Schema::table('customer_purchases', function (Blueprint $table) {
             $table->renameColumn('value', 'purchase_value');
         });
     }
