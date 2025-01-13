@@ -4,6 +4,7 @@
 ##### 2025-XX-YY
 
 - Added customer_number to the Customers table
+- Changed the purchasable morph to be nullable in the `customer_purchases` table
 
 ## 3.2.0
 ##### 2024-12-14
