@@ -10,7 +10,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('customer_purchases', function (Blueprint $table) {
-            $table->string('reference')->nullable()->after('purchase_id');
+            $table->string('reference')->nullable()->after('purchasable_id');
         });
     }
 
