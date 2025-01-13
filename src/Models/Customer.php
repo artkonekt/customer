@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Konekt\Address\Contracts\Address;
 use Konekt\Address\Models\AddressProxy;
 use Konekt\Customer\Contracts\Customer as CustomerContract;
+use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
 use Konekt\Customer\Events\CustomerTypeWasChanged;
 use Konekt\Customer\Events\CustomerWasCreated;
 use Konekt\Customer\Events\CustomerWasUpdated;
@@ -114,6 +115,23 @@ class Customer extends Model implements CustomerContract
     {
         $value = $address instanceof Address ? $address->id : $address;
         $this->update(['default_billing_address_id' => $value]);
+    }
+
+    public function addPurchase(\DateTimeInterface $date, float $value, string $currency, ?Model $purchasable = null, ?string $reference = null): CustomerPurchaseContract
+    {
+        $attributes = [
+            'value' => $value,
+            'currency' => $currency,
+            'date' => $date,
+            'reference' => $reference,
+        ];
+
+        if (null !== $purchasable) {
+            $attributes['purchasable_id'] = $purchasable->id;
+            $attributes['purchasable_type'] = morph_type_of($purchasable);
+        }
+
+        return $this->purchases()->create($attributes);
     }
 
     public function addresses(): MorphMany

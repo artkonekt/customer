@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Konekt\Customer\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Konekt\Address\Contracts\Address;
 
@@ -36,4 +37,6 @@ interface Customer
     public function setDefaultShippingAddress(Address|int|null $address): void;
 
     public function setDefaultBillingAddress(Address|int|null $address): void;
+
+    public function addPurchase(\DateTimeInterface $date, float $value, string $currency, ?Model $purchasable = null, ?string $reference = null): CustomerPurchase;
 }

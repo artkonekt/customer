@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Carbon\Carbon;
+use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
 use Konekt\Customer\Models\CustomerProxy;
 use Konekt\Customer\Models\CustomerPurchase;
 use Konekt\Customer\Models\CustomerPurchaseProxy;
@@ -197,5 +199,57 @@ class CustomerPurchaseTest extends TestCase
 
         $this->assertTrue($customer->purchases->map->purchasable->pluck('number')->contains('50M3-0RD3R-NUMB3R'));
         $this->assertTrue($customer->purchases->map->purchasable->pluck('number')->contains('WH47-H4V3-Y0U-B0U6H7'));
+    }
+
+    /** @test */
+    public function it_can_be_created_via_the_customers_adder_method_with_minimal_data()
+    {
+        /** @var \Konekt\Customer\Models\Customer $customer */
+        $customer = CustomerProxy::create([])->fresh();
+        $purchase = $customer->addPurchase(Carbon::parse('2025-01-11'), 5790.12, 'SEK');
+
+        $this->assertInstanceOf(CustomerPurchaseContract::class, $purchase);
+        $this->assertEquals('2025-01-11', $purchase->date->format('Y-m-d'));
+        $this->assertEquals(5790.12, $purchase->value);
+        $this->assertEquals('SEK', $purchase->currency);
+        $this->assertNull($purchase->reference);
+        $this->assertNull($purchase->purchasable);
+        $this->assertTrue($customer->is($purchase->customer));
+    }
+
+    /** @test */
+    public function it_can_be_created_via_the_customers_adder_method_using_a_reference()
+    {
+        /** @var \Konekt\Customer\Models\Customer $customer */
+        $customer = CustomerProxy::create([])->fresh();
+        $purchase = $customer->addPurchase(Carbon::parse('2025-01-12'), 107.99, 'USD', null, 'Invoice IVR-79807');
+
+        $this->assertInstanceOf(CustomerPurchaseContract::class, $purchase);
+        $this->assertEquals('2025-01-12', $purchase->date->format('Y-m-d'));
+        $this->assertEquals(107.99, $purchase->value);
+        $this->assertEquals('USD', $purchase->currency);
+        $this->assertEquals('Invoice IVR-79807', $purchase->reference);
+        $this->assertNull($purchase->purchasable);
+        $this->assertTrue($customer->is($purchase->customer));
+    }
+
+    /** @test */
+    public function it_can_be_created_via_the_customers_adder_method_using_a_purchasable()
+    {
+        /** @var \Konekt\Customer\Models\Customer $customer */
+        $customer = CustomerProxy::create([])->fresh();
+
+        $order = Order::create(['number' => 'gI61lXT9JOmpBnz6mcRtH']);
+
+        $purchase = $customer->addPurchase(Carbon::parse('2025-01-13'), 81, 'USD', $order)->fresh();
+
+        $this->assertInstanceOf(CustomerPurchaseContract::class, $purchase);
+        $this->assertEquals('2025-01-13', $purchase->date->format('Y-m-d'));
+        $this->assertEquals(81, $purchase->value);
+        $this->assertEquals('USD', $purchase->currency);
+        $this->assertNull($purchase->reference);
+        $this->assertInstanceOf(Order::class, $purchase->purchasable);
+        $this->assertTrue($purchase->purchasable->is($order));
+        $this->assertTrue($customer->is($purchase->customer));
     }
 }
