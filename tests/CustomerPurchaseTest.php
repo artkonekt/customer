@@ -63,6 +63,7 @@ class CustomerPurchaseTest extends TestCase
             'currency' => 'EUR',
             'purchasable_id' => $order->id,
             'purchasable_type' => Order::class,
+            'reference' => $order->number,
         ])->fresh();
 
         $this->assertTrue($order->is($customerPurchase->purchasable));
@@ -70,6 +71,7 @@ class CustomerPurchaseTest extends TestCase
         $this->assertEquals(89.62, $customerPurchase->purchase_value);
         $this->assertEquals('EUR', $customerPurchase->currency);
         $this->assertEquals('2024-11-21', $customerPurchase->purchase_date->toDateString());
+        $this->assertEquals('70H-0WJB-2OD6', $customerPurchase->reference);
     }
 
     /**

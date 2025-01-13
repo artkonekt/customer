@@ -4,6 +4,8 @@
 ##### 2025-XX-YY
 
 - Added customer_number to the Customers table
+- Added the `reference` field to the `customer_purchases` table
+   it can be used to identify the purchase in case the purchasable is not inside the current DB or application
 - Changed the purchasable morph to be nullable in the `customer_purchases` table
 
 ## 3.2.0

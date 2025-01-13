@@ -18,6 +18,7 @@ use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
  * @property string $currency
  * @property int|null $purchasable_id
  * @property string|null $purchasable_type
+ * @property string|null $reference
  *
  * @property-read Model|null $purchasable
  * @property-read Customer $customer
