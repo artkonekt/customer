@@ -16,10 +16,10 @@ use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
  * @property Carbon $purchase_date
  * @property float $purchase_value
  * @property string $currency
- * @property int $purchasable_id
- * @property string $purchasable_type
+ * @property int|null $purchasable_id
+ * @property string|null $purchasable_type
  *
- * @property-read Model $purchasable
+ * @property-read Model|null $purchasable
  * @property-read Customer $customer
  */
 class CustomerPurchase extends Model implements CustomerPurchaseContract

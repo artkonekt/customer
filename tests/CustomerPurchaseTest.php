@@ -15,6 +15,20 @@ class CustomerPurchaseTest extends TestCase
      */
     public function customer_purchase_can_be_created_with_minimal_data(): void
     {
+        $customer = CustomerProxy::create([])->fresh();
+
+        $customerPurchase = CustomerPurchaseProxy::create([
+            'customer_id' => $customer->id,
+        ])->fresh();
+
+        $this->assertTrue($customer->is($customerPurchase->customer));
+    }
+
+    /**
+     * @test
+     */
+    public function customer_purchase_can_be_created_with_a_customer_and_a_purchasable(): void
+    {
         $order = Order::create([
             'number' => '70H-0WJB-2OD6'
         ]);
