@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2025-XX-YY
+## 3.3.0
+##### 2025-01-13
 
 - Added customer_number to the Customers table
 
