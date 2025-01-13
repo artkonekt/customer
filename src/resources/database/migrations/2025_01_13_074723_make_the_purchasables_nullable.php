@@ -18,8 +18,8 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('customer_purchases', function (Blueprint $table) {
-            $table->unsignedBigInteger('purchasable_id')->nullable(false)->change();
-            $table->string('purchasable_type')->nullable(false)->change();
+            //$table->unsignedBigInteger('purchasable_id')->nullable(false)->change();
+            //$table->string('purchasable_type')->nullable(false)->change();
         });
     }
 };
