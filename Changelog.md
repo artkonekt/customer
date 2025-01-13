@@ -7,6 +7,9 @@
 - Added the `reference` field to the `customer_purchases` table
    it can be used to identify the purchase in case the purchasable is not inside the current DB or application
 - Changed the purchasable morph to be nullable in the `customer_purchases` table
+- Renamed the following fields in the `customer_purchases` table:
+   - `purchase_date` => `date`
+   - `purchase_value` => `value`
 
 ## 3.2.0
 ##### 2024-12-14

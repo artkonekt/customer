@@ -13,8 +13,8 @@ use Konekt\Customer\Contracts\CustomerPurchase as CustomerPurchaseContract;
 /**
  * @property int $id
  * @property int $customer_id
- * @property Carbon $purchase_date
- * @property float $purchase_value
+ * @property Carbon $date
+ * @property float $value
  * @property string $currency
  * @property int|null $purchasable_id
  * @property string|null $purchasable_type
@@ -28,7 +28,7 @@ class CustomerPurchase extends Model implements CustomerPurchaseContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'purchase_date' => 'date',
+        'date' => 'date',
     ];
 
     public function purchasable(): MorphTo
