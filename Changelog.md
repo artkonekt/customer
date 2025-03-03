@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2025-XX-YY
+## 3.4.0
+##### 2025-03-03
 
 - Added Laravel 12 support
 
