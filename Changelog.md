@@ -1,9 +1,14 @@
 # Customer Module Changelog
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added Laravel 12 support
+
 ## 3.3.0
 ##### 2025-01-13
 
-- Added customer_number to the Customers table
+- Added the `customer_number` field to the customers table
 
 ## 3.2.0
 ##### 2024-12-14
