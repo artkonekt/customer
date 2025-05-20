@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2025-XX-YY
+## 3.5.0
+##### 2025-05-20
 
 - Added the `billingAddresses()` and `shippingAddresses()` shortcut methods to the Customer model
 
