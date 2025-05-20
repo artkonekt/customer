@@ -116,6 +116,16 @@ class Customer extends Model implements CustomerContract
         $this->update(['default_billing_address_id' => $value]);
     }
 
+    public function billingAddresses(): Collection
+    {
+        return $this->addresses->filter(fn (Address $address) => $address->type->is_billing);
+    }
+
+    public function shippingAddresses(): Collection
+    {
+        return $this->addresses->filter(fn (Address $address) => $address->type->is_shipping);
+    }
+
     public function addresses(): MorphMany
     {
         return $this->morphMany(AddressProxy::modelClass(), 'model');
@@ -135,8 +145,8 @@ class Customer extends Model implements CustomerContract
     {
         parent::boot();
 
-        static::resolveRelationUsing('default_shipping_address', fn ($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_shipping_address_id'));
-        static::resolveRelationUsing('default_billing_address', fn ($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_billing_address_id'));
+        static::resolveRelationUsing('default_shipping_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_shipping_address_id'));
+        static::resolveRelationUsing('default_billing_address', fn($model) => $model->belongsTo(AddressProxy::modelClass(), 'default_billing_address_id'));
 
         static::updated(function ($customer) {
             if ($customer->original['type'] ?? null !== $customer->type) {
