@@ -15,6 +15,7 @@
 | 9.x     | 2.2 - 2.4 |
 | 10.x    | 2.4+      |
 | 11.x    | 3.0+      |
+| 12.x    | 3.4+      |
 
 
 ## Installation With Composer

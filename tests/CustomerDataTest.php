@@ -128,4 +128,28 @@ class CustomerDataTest extends TestCase
 
         $this->assertEquals('1337', $customer->customer_number);
     }
+
+    /**
+     * @test
+     */
+    public function customer_acquisition_data_can_be_written_and_read(): void
+    {
+        $customer = Customer::create([
+            'type' => CustomerType::INDIVIDUAL(),
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'acquired_via' => 'popup',
+            'acquisition_details' => [
+                'campaign' => '5 EUR coupon',
+                'site' => 'mysite.be',
+            ],
+        ]);
+
+        $customer = $customer->fresh();
+
+        $this->assertEquals('popup', $customer->acquired_via);
+        $this->assertIsArray($customer->acquisition_details);
+        $this->assertEquals('5 EUR coupon', $customer->acquisition_details['campaign']);
+        $this->assertEquals('mysite.be', $customer->acquisition_details['site']);
+    }
 }

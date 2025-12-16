@@ -36,19 +36,25 @@ var_dump($acmeInc->type->isOrganization());
 
 ## Fields
 
-| Name             | Type                              | Notes                                                                                    |
-|:-----------------|:----------------------------------|:-----------------------------------------------------------------------------------------|
-| id               | autoinc                           |                                                                                          |
-| type             | CustomerType                      | enum                                                                                     |
-| email            | string                            |                                                                                          |
-| phone            | string(22)                        |                                                                                          |
-| firstname        | string                            |                                                                                          |
-| lastname         | string                            |                                                                                          |
-| company_name     | string                            |                                                                                          |
-| tax_nr           | string(17)                        | [Tax/VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number) |
-| registration_nr  | Company/Trade Registration Number |                                                                                          |
-| is_active        | bool                              | true by default                                                                          |
-| last_purchase_at | DateTime                          | nullable                                                                                 |
+| Name                | Type                              | Notes                                                                                                       |
+|:--------------------|:----------------------------------|:------------------------------------------------------------------------------------------------------------|
+| id                  | autoinc                           |                                                                                                             |
+| type                | CustomerType*                     | enum                                                                                                        |
+| email               | string                            |                                                                                                             |
+| phone               | string(22)                        |                                                                                                             |
+| firstname           | string                            |                                                                                                             |
+| lastname            | string                            |                                                                                                             |
+| company_name        | string                            |                                                                                                             |
+| tax_nr              | string(17)                        | [Tax/VAT Identification Number](https://en.wikipedia.org/wiki/VAT_identification_number)                    |
+| registration_nr     | Company/Trade Registration Number |                                                                                                             |
+| is_active           | bool                              | true by default                                                                                             |
+| timezone            | string                            | e.g. `Europe/Amsterdam`                                                                                     |
+| ltv                 | float                             | Lifetime Value of the customer                                                                              |
+| currency            | string(3)                         | The currency of the customer (individual purchases can still be in other currencies)                        |
+| last_purchase_at    | DateTime                          |                                                                                                             |
+| customer_number     | string                            | This can be the id/number of the customer in other systems like an ERP                                      |
+| acquired_via        | string                            | Here you can freely record where the customer was acquired from. E.g. "registration", "newsletter", etc     |
+| acquisition_details | json/array                        | In this field you can save additional details about the customer acquisition like campaing id, location, etc |
 
 ## Extending & Customizing
 
