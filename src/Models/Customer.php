@@ -45,6 +45,8 @@ use Konekt\Enum\Eloquent\CastsEnums;
  * @property int|null $default_billing_address_id
  * @property int|null $default_shipping_address_id
  * @property string|null $customer_number
+ * @property string|null $acquired_via
+ * @property array|null $acquisition_details
  *
  * @property-read Collection|Address[] $addresses
  * @property-read Address|null $default_billing_address
@@ -64,6 +66,7 @@ class Customer extends Model implements CustomerContract
         'is_active' => 'boolean',
         'last_purchase_at' => 'datetime',
         'ltv' => 'float',
+        'acquisition_details' => 'json'
     ];
 
     protected $enums = [

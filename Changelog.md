@@ -1,5 +1,10 @@
 # Customer Module Changelog
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the `acquired_via`, and `acquisition_details` fields to the customer table
+
 ## 3.5.0
 ##### 2025-05-20
 
