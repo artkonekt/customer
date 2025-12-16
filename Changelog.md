@@ -1,7 +1,7 @@
 # Customer Module Changelog
 
-## Unreleased
-##### 2025-XX-YY
+## 3.6.0
+##### 2025-12-16
 
 - Added the `acquired_via`, and `acquisition_details` fields to the customer table
 - Added PHP 8.5 support
