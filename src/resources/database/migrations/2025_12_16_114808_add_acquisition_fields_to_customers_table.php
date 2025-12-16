@@ -10,14 +10,16 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('customer_number')->nullable();
+            $table->string('acquired_via')->nullable();
+            $table->json('acquisition_details')->nullable();
         });
     }
 
     public function down(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('customer_number');
+            $table->dropColumn('acquired_via');
+            $table->dropColumn('acquisition_details');
         });
     }
 };
