@@ -19,6 +19,8 @@ return new class () extends Migration {
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('acquired_via');
+        });
+        Schema::table('customers', function (Blueprint $table) {
             $table->dropColumn('acquisition_details');
         });
     }

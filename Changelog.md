@@ -1,5 +1,10 @@
 # Customer Module Changelog
 
+## Unreleased
+##### 2026-XX-YY
+
+- Fixed Laravel 10 + SQLite compatibility in migration (3.6.x) 
+
 ## 3.6.0
 ##### 2025-12-16
 
