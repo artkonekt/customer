@@ -12,6 +12,11 @@
 - Added explicit MySQL 8.4 support (being actively tested against in the CI)
 - Changed the Postgres testing policy to use v15 and v18
 
+## 3.6.1
+##### 2026-04-21
+
+- Fixed Laravel 10 + SQLite compatibility in migration (3.6.x) 
+
 ## 3.6.0
 ##### 2025-12-16
 
