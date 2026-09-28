@@ -3,6 +3,10 @@
 ## Unreleased - 4.x
 ##### 2025-XX-YY
 
+- Dropped Laravel 12 support
+- Dropped PHP 8.3 support
+- Changed the minimum Laravel version requirements to v12.61.1 and v13.12
+- Added MySQL 9.7 support (being actively tested against in the CI)
 - BC: Added the `addPurchase` method to the `Customer` interface
 - BC: Renamed the following fields in the `customer_purchases` table:
     - `purchase_date` => `date`

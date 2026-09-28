@@ -18,16 +18,16 @@
     "require": {
         "php": "^8.3",
         "ext-pdo": "*",
-        "konekt/concord": "^1.14",
-        "konekt/enum": "^4.1",
+        "konekt/concord": "^1.18",
+        "konekt/enum": "^4.2",
         "konekt/user": "^3.0",
         "konekt/address": "^3.0",
-        "konekt/laravel-migration-compatibility": "^1.6",
-        "laravel/framework": "^11.46.2|^12.50|^13.0"
+        "konekt/laravel-migration-compatibility": "^1.10",
+        "laravel/framework": "^12.61.1|^13.12"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "orchestra/testbench": "^10.0|^11.0",
         "phpunit/phpunit" : "10 - 11",
         "mockery/mockery": "^1.6.1"
     },

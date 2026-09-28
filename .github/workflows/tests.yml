@@ -8,8 +8,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        php: [ '8.3', '8.4', '8.5' ]
-        laravel: [ '11.46', '11.50', '12.50', '12.56', '13.0', '13.5' ]
+        php: [ '8.4', '8.5' ]
+        laravel: [ '12.61', '12.69', '13.12', '13.33' ]
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
@@ -48,6 +48,11 @@ jobs:
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
+      - name: Run Tests [mysql 9.7]
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
+        env:
+          TEST_DB_ENGINE: mysql
+          TEST_DB_PORT: ${{ job.services.mysql9.ports[3306] }}
     services:
       mysql8:
         image: mysql:8.4
@@ -56,6 +61,23 @@ jobs:
           MYSQL_DATABASE: customer_test
         ports:
           - 3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      mysql9:
+        image: mysql:9.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: customer_test
+        ports:
+          - 3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
       postgres15:
         image: postgres:15
         env:
