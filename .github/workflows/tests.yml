@@ -8,13 +8,8 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
-        laravel: ['10.0', '10.48', '11.0', '11.37']
-        exclude:
-          - php: '8.1'
-            laravel: '11.0'
-          - php: '8.1'
-            laravel: '11.37'
+        php: [ '8.3', '8.4', '8.5' ]
+        laravel: [ '11.46', '11.50', '12.50', '12.56', '13.0', '13.5' ]
     name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
@@ -28,8 +23,6 @@ jobs:
       - name: Lock Package Versions
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}.*" --no-update -v
-          is_smaller_version() [[ $(echo -e "$1\n$2"|sort -V|head -1) != $2 ]]
-          is_smaller_version "${{ matrix.laravel }}" "10.38.2" && composer req "doctrine/dbal:^3.5.1" --no-update || true
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Create SQLite Database
@@ -38,39 +31,45 @@ jobs:
         run: php vendor/bin/phpunit --testdox --stop-on-error --display-errors
         env:
           TEST_DB_ENGINE: sqlite
-      - name: Run Tests [mysql 5.7]
-        run: php vendor/bin/phpunit --testdox --stop-on-error --display-errors
+      - name: Run Tests [postgres 15]
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
-          TEST_DB_ENGINE: mysql
-          TEST_DB_PORT: ${{ job.services.mysql.ports[3306] }}
-      - name: Run Tests [mysql 8.0]
-        run: php vendor/bin/phpunit --testdox --stop-on-error --display-errors
+          TEST_DB_ENGINE: pgsql
+          TEST_DB_PORT: ${{ job.services.postgres15.ports[5432] }}
+          TEST_DB_PASSWORD: postgres
+      - name: Run Tests [postgres 18]
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
+        env:
+          TEST_DB_ENGINE: pgsql
+          TEST_DB_PORT: ${{ job.services.postgres18.ports[5432] }}
+          TEST_DB_PASSWORD: postgres
+      - name: Run Tests [mysql 8.4]
+        run: php vendor/bin/phpunit --stop-on-defect --testdox --stderr --display-deprecations
         env:
           TEST_DB_ENGINE: mysql
           TEST_DB_PORT: ${{ job.services.mysql8.ports[3306] }}
-      - name: Run Tests [postgres]
-        run: php vendor/bin/phpunit --testdox --stop-on-error --display-errors
-        env:
-          TEST_DB_ENGINE: pgsql
-          TEST_DB_PORT: ${{ job.services.postgres.ports[5432] }}
-          TEST_DB_PASSWORD: postgres
     services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: customer_test
-        ports:
-          - 3306
       mysql8:
-        image: mysql:8.0
+        image: mysql:8.4
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: customer_test
         ports:
           - 3306
-      postgres:
-        image: postgres
+      postgres15:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: customer_test
+        ports:
+          - 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      postgres18:
+        image: postgres:18
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: customer_test

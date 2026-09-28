@@ -13,10 +13,45 @@
 
 ---
 
+## 3.7.0
+##### 2026-04-17
+
+- Added Laravel 13 support
+- Dropped Laravel 10 support
+- Dropped PHP 8.2 support
+- Changed the minimum Laravel version requirements to v11.46.2, v12.50 and v13.0
+- Dropped MySQL 5.7 support (it still works, but it is no longer included in the CI tests)
+- Dropped MySQL 8.0 support (it still works, but it is no longer included in the CI tests)
+- Added explicit MySQL 8.4 support (being actively tested against in the CI)
+- Changed the Postgres testing policy to use v15 and v18
+
+## 3.6.1
+##### 2026-04-21
+
+- Fixed Laravel 10 + SQLite compatibility in migration (3.6.x) 
+
+## 3.6.0
+##### 2025-12-16
+
+- Added the `acquired_via`, and `acquisition_details` fields to the customer table
+- Added PHP 8.5 support
+- Changed the minimum Laravel version requirements to v10.48, v11.46.2 and v12.38 respectively
+- Dropped PHP 8.1 support
+
+## 3.5.0
+##### 2025-05-20
+
+- Added the `billingAddresses()` and `shippingAddresses()` shortcut methods to the Customer model
+
+## 3.4.0
+##### 2025-03-03
+
+- Added Laravel 12 support
+
 ## 3.3.0
 ##### 2025-01-13
 
-- Added customer_number to the Customers table
+- Added the `customer_number` field to the customers table
 
 ## 3.2.0
 ##### 2024-12-14

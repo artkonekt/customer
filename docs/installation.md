@@ -15,6 +15,7 @@
 | 9.x     | 2.2 - 2.4 |
 | 10.x    | 2.4+      |
 | 11.x    | 3.0+      |
+| 12.x    | 3.4+      |
 
 
 ## Installation With Composer
@@ -43,7 +44,7 @@ php artisan concord:modules -a
 +----+------------------------+--------+---------+------------------+-----------------+
 | #  | Name                   | Kind   | Version | Id               | Namespace       |
 +----+------------------------+--------+---------+------------------+-----------------+
-| 1. | Konekt Customer Module | Module | 3.3.0   | konekt.customer  | Konekt\Customer |
+| 1. | Konekt Customer Module | Module | 3.7.0   | konekt.customer  | Konekt\Customer |
 +----+------------------------+--------+---------+------------------+-----------------+
 ```
 
